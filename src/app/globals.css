@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Tokens extraídos de .figma/*.md (Figma: arquivo fvtDPNnt1mbHHDqjDto1hr, página SITE). */
+@theme {
+  --color-ink: #000000;
+  --color-accent: #a45e02;
+  --color-cream: #f9f6f2;
+  --color-sand: #eeead9;
+  --color-orange: #eb7102;
+  --color-honey: #eead44;
+  --color-copper: #c46f36;
+  --color-wine: #8c334d;
+  --color-title: #141414;
+  --color-graphite: #2c2c2c;
+  --color-slate: #2b2b35;
+}
+
+@theme inline {
+  --font-contrail: var(--nf-contrail);
+  --font-notable: var(--nf-notable);
+  --font-grotesque: var(--nf-grotesque);
+  --font-content: var(--nf-content);
+  --font-bruno: var(--nf-bruno);
+}
+
+html {
+  background: #ffffff;
+  color: var(--color-ink);
+  /* Avanços fracionários como no Figma: sem isso o Chrome arredonda e os textos crescem até 5px. */
+  text-rendering: geometricPrecision;
+}
+
+/* Em @layer components para que utilitários do Tailwind possam sobrescrever. */
+@layer components {
+  /*
+   * Canvas: os filhos são posicionados em px do Figma (--x, --y, --w, --h), relativos a um
+   * quadro de largura --W, e escalam com a largura do canvas (1 px do Figma = 100cqw / --W).
+   * O layout é o do Figma em qualquer largura; no mobile só os textos crescem (ver --fs).
+   */
+  .cv {
+    position: relative;
+    container-type: inline-size;
+  }
+
+  .abs,
+  .t {
+    --u: calc(100cqw / var(--W));
+  }
+
+  .abs {
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+    width: calc(var(--w) * var(--u));
+    height: calc(var(--h) * var(--u));
+  }
+
+  /* Texto no tamanho do Figma; entrelinha e espaçamento já vêm em unidades relativas. */
+  .t {
+    font-size: calc(var(--fs) * var(--u));
+    line-height: var(--lh, normal);
+    letter-spacing: var(--ls, 0);
+    white-space: nowrap;
+    translate: 0 calc(var(--dy, 0) * var(--u));
+  }
+
+  .anim {
+    transition-property:
+      left, top, width, height, rotate, font-size, background-color, color,
+      box-shadow;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim {
+      transition: none;
+    }
+  }
+
+  /* Faixas que no Figma vão até a borda do frame continuam até a borda da janela (>1440px). */
+  .bleed-x {
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 -100vmax);
+  }
+
+  .bleed-r {
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 -100vmax 0 0);
+  }
+}
