@@ -18,7 +18,7 @@ export const notable = Notable({
   variable: "--nf-notable",
 });
 export const darkerGrotesque = Darker_Grotesque({
-  weight: "400",
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--nf-grotesque",
 });
