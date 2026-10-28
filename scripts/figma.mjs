@@ -3,7 +3,7 @@
 //   node scripts/figma.mjs listar
 //   node scripts/figma.mjs baixar <node-id> <slug> [escala=2]   (frames altos: 1, o Figma reduz exports > ~32 MP)
 //   node scripts/figma.mjs importar <figma-export.zip>   (zip do figma-plugin/, sem cota)
-//   node scripts/figma.mjs comparar <slug> <captura.png> [--escala=1]
+//   node scripts/figma.mjs comparar <slug> <captura.png> [--escala=1] [--pagina=<node-id>]
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -299,8 +299,21 @@ async function comparar(slug, capturePath, ...opts) {
   const { PNG } = await import("pngjs");
   const pixelmatch = (await import("pixelmatch")).default;
   const node = JSON.parse(readFileSync(resolve(OUT, `${slug}.json`), "utf8"));
-  const box = node.absoluteBoundingBox;
-  const render = node.absoluteRenderBounds ?? box;
+  // --pagina=<id>: compara só a área de um frame interno (Itaú/Trama: página de 1440 dentro de um
+  // frame maior); o PNG continua sendo o da raiz.
+  const pageId = opts
+    .find((o) => o.startsWith("--pagina="))
+    ?.slice(9)
+    .replace(/-/g, ":");
+  const findNode = (n, id) =>
+    n.id === id
+      ? n
+      : (n.children ?? []).reduce((f, c) => f ?? findNode(c, id), null);
+  const box = pageId
+    ? findNode(node, pageId)?.absoluteBoundingBox
+    : node.absoluteBoundingBox;
+  if (!box) throw new Error(`Nó ${pageId} não encontrado em ${slug}`);
+  const render = node.absoluteRenderBounds ?? node.absoluteBoundingBox;
 
   let fig = PNG.sync.read(readFileSync(resolve(OUT, `${slug}.png`)));
   let cap = PNG.sync.read(readFileSync(resolve(capturePath)));
