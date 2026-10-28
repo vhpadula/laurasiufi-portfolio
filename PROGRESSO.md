@@ -1,20 +1,22 @@
 # Progresso — portfólio Figma → Next.js
 
 ## Etapa atual
-Passo 4 — home e About aprovados. **Cases (TuttiFree, Itaú, Trama) implementados e medidos** durante a
-noite, com autorização do usuário para seguir sem aprovação por página (ajustes depois). Falta:
-revisão do usuário, novo export pelo plugin (listas) e decisão de mobile dos cases. Passo 5 ainda não
-começou.
+Passo 4 — home e About aprovados. Cases (TuttiFree, Itaú, Trama) implementados e medidos, aguardando
+revisão. **A Laura está fazendo uma v2 do Figma, agora com mobile** (resposta de 2026-10-28). Passo 5
+ainda não começou.
 
-### Para fazer de manhã
-1. **Reexportar os 3 cases pelo plugin atualizado** (recarregar o plugin no Figma Desktop; selecionar
-   `itaú`, `trama`, `tuttifree`; salvar `figma-export.zip` na raiz). O plugin agora exporta listas
-   (marcador/recuo), espaço entre parágrafos e links, que não estão no export atual — as listas do Trama
-   saem sem marcador e sem recuo. Depois: `importar` + `gerar-case` (eu rodo).
-2. **Mobile dos cases:** ilegível abaixo de ~768px (texto de 3–6px a 360px). O layout dos cases é
-   denso e posicionado; não dá para só aumentar o texto como na home. Precisa de layout mobile do design
-   (ou uma decisão: ex. mostrar um aviso/versão simplificada). Ver "Para perguntar ao design", item 5.
-3. Revisar as 3 páginas: http://localhost:3000/work/tuttifree, /work/itau, /work/trama.
+### Pendências
+1. **Aguardar a v2 do Figma (com frames mobile).** Quando chegar: `listar`, rebaixar só os frames que
+   mudaram (pelo plugin, enquanto a cota da API estiver esgotada), dizer o que mudou e remedir só essas
+   páginas. Implementar os frames mobile (home, About e cases) no lugar da adaptação atual.
+2. **Reexportar os 3 cases pelo plugin atualizado** (listas com marcador/recuo, espaço entre
+   parágrafos e links). Pode vir junto com a v2. Depois: `importar` + `gerar-case` (eu rodo).
+3. **Erros de digitação do About:** a Laura vai corrigir no Figma. Na v2, conferir se o texto bate com
+   as correções que já estão no site.
+4. **Fonte do e-mail:** a Laura liberou trocar a "Content" (só tem dígitos/pontuação). Escolher uma
+   fonte com letras (sugestão: Noto Sans, que já é o que aparece) e remover a Content.
+5. **Textos alternativos das imagens dos cases:** ainda sem resposta (hoje `alt=""`).
+6. Revisar as 3 páginas de case: http://localhost:3000/work/tuttifree, /work/itau, /work/trama.
 
 ## Ambiente
 - Node v22.22.2, npm 12.0.2 · Next 16.4.3 (Turbopack, App Router, `src/`), React 19.3, Tailwind 4
@@ -77,26 +79,16 @@ porque Figma e Chrome reamostram com filtros diferentes (testado: desligar a oti
 `next/image` não muda o número), então o critério de 0,5% é aplicado às faixas **sem fotos**.
 
 
-## Para perguntar ao design
-1. **Mobile:** não há frame no Figma. Hoje a composição escala proporcionalmente e só os textos crescem
-   (< 768px); "more about" de Itaú/Trama quebra em 2 linhas. É a direção desejada ou haverá um layout
-   mobile próprio?
-2. **Fonte do e-mail:** "Content" (Google Fonts) só tem números e pontuação — as letras aparecem em
-   Noto Sans (fallback do Figma). Era a intenção ou a fonte deveria ser outra?
-3. **Erros de digitação no About (`15:224`):** corrigidos no site; confirmar as correções e ajustar no
-   Figma para os dois não divergirem.
-   - "a **gradueted** artist" → "a **graduated** artist" (`15:282`)
-   - "My **graduetion** on Visual Arts" → "My **graduation** on Visual Arts" (`15:288`)
-   - "a **criative** mind" → "a **creative** mind" (`15:288`)
-   - "my sensibility and **criativity**" → "my sensibility and **creativity**" (`15:291`)
-   - "on **solucions** that helps people" → "on **solutions** that **help** people" (`15:291`)
-   - "transform **a experience**" → "transform **an experience**" (`16:305`)
-   - "I **Like** to explore" → "I **like** to explore" (`16:305`)
-4. **Telas maiores que 1440px:** o conteúdo fica centralizado em 1440 e as faixas de cor vão até a
-   borda da janela. Ok?
-5. **Mobile dos cases:** as páginas de case são longas e densas (até 42.000px de altura no desktop). Em
-   celular o texto fica com 3–6px. Vai haver um layout mobile desses cases?
-6. **Textos alternativos das imagens dos cases:** o Figma não tem; quem escreve?
+## Respostas do design (2026-10-28)
+1. **Mobile:** não era a direção — a Laura vai desenhar o mobile (v2 do Figma).
+2. **Fonte do e-mail:** "pouco importa, pode mudar sem problema" → trocar a Content (pendência 4).
+3. **Erros de digitação no About (`15:224`):** confirmados; ela vai corrigir no Figma. Correções já
+   no site: gradueted→graduated (`15:282`); graduetion→graduation e criative→creative (`15:288`);
+   criativity→creativity e "solucions that helps"→"solutions that help" (`15:291`);
+   "a experience"→"an experience" e "Like"→"like" (`16:305`).
+4. **Telas maiores que 1440px:** aprovado (conteúdo centralizado em 1440, faixas de cor até a borda).
+5. **Mobile dos cases:** coberto pelo item 1.
+6. **Textos alternativos das imagens dos cases:** ainda não perguntado/respondido.
 
 ## Placeholders pendentes
 - `alt` das fotos: escritos a partir dos nomes das camadas (ex.: "pao batata doce" → "Sweet potato bread").
