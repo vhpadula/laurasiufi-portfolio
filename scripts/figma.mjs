@@ -324,26 +324,35 @@ async function comparar(slug, capturePath, ...opts) {
   // o export já veio reduzido (as duas imagens passaram por reamostragens diferentes).
   const target =
     Number(opts.find((o) => o.startsWith("--escala="))?.slice(9)) || null;
+  // Escalas separadas: exports altos são limitados a 32768px de altura e a escala vertical fica um
+  // pouco diferente da horizontal (0,08% no Itaú = dezenas de px de deriva no fim da página).
   let SCALE = fig.width / render.width;
-  if (target && Math.abs(SCALE - target) > 0.001) {
-    fig = resample(PNG, fig, target / SCALE);
-    SCALE = target;
+  let SCALE_Y = fig.height / render.height;
+  if (
+    target &&
+    (Math.abs(SCALE - target) > 0.001 || Math.abs(SCALE_Y - target) > 0.001)
+  ) {
+    fig = resample(PNG, fig, target / SCALE, target / SCALE_Y);
+    SCALE = SCALE_Y = target;
   }
   const capScale = cap.width / box.width;
-  if (Math.abs(SCALE - capScale) > 0.001) {
+  if (
+    Math.abs(SCALE - capScale) > 0.0001 ||
+    Math.abs(SCALE_Y - capScale) > 0.0001
+  ) {
     console.warn(
-      `Export do Figma em ${SCALE.toFixed(4)}x, captura em ${capScale.toFixed(4)}x; reamostrando a captura`,
+      `Export do Figma em ${SCALE.toFixed(4)}×${SCALE_Y.toFixed(4)}, captura em ${capScale.toFixed(4)}x; reamostrando a captura`,
     );
-    cap = resample(PNG, cap, SCALE / capScale);
+    cap = resample(PNG, cap, SCALE / capScale, SCALE_Y / capScale);
   }
   writeFileSync(resolve(OUT, `${slug}.cap.png`), PNG.sync.write(cap));
   writeFileSync(resolve(OUT, `${slug}.ref.png`), PNG.sync.write(fig));
 
   // O export cobre os render bounds (sombras podem aumentá-lo); recorta no frame.
   const ox = Math.max(0, Math.round((box.x - render.x) * SCALE));
-  const oy = Math.max(0, Math.round((box.y - render.y) * SCALE));
+  const oy = Math.max(0, Math.round((box.y - render.y) * SCALE_Y));
   const fw = Math.min(Math.round(box.width * SCALE), fig.width - ox);
-  const fh = Math.min(Math.round(box.height * SCALE), fig.height - oy);
+  const fh = Math.min(Math.round(box.height * SCALE_Y), fig.height - oy);
   const ref = new PNG({ width: fw, height: fh });
   PNG.bitblt(fig, ref, ox, oy, fw, fh, 0, 0);
 
@@ -353,7 +362,7 @@ async function comparar(slug, capturePath, ...opts) {
     );
   if (Math.abs(cap.height - fh) > 1)
     console.warn(
-      `Aviso: altura da captura ${r(cap.height / SCALE)} ≠ frame ${r(box.height)} CSS px`,
+      `Aviso: altura da captura ${r(cap.height / SCALE_Y)} ≠ frame ${r(box.height)} CSS px`,
     );
   const w = Math.min(fw, cap.width);
   const h = Math.min(fh, cap.height);
@@ -381,9 +390,9 @@ async function comparar(slug, capturePath, ...opts) {
       const b = n.absoluteBoundingBox;
       photos.push([
         (b.x - box.x) * SCALE,
-        (b.y - box.y) * SCALE,
+        (b.y - box.y) * SCALE_Y,
         (b.x - box.x + b.width) * SCALE,
-        (b.y - box.y + b.height) * SCALE,
+        (b.y - box.y + b.height) * SCALE_Y,
       ]);
     }
     for (const c of n.children ?? []) collect(c);
@@ -392,9 +401,9 @@ async function comparar(slug, capturePath, ...opts) {
     photos.some(([x0, y0, x1, y1]) => x >= x0 && x < x1 && y >= y0 && y < y1);
 
   const bands = [];
-  for (let css = 0; css * SCALE < h; css += 50) {
-    const y0 = Math.round(css * SCALE);
-    const y1 = Math.min(h, Math.round((css + 50) * SCALE));
+  for (let css = 0; css * SCALE_Y < h; css += 50) {
+    const y0 = Math.round(css * SCALE_Y);
+    const y1 = Math.min(h, Math.round((css + 50) * SCALE_Y));
     let n = 0;
     let np = 0;
     for (let y = y0; y < y1; y++)
@@ -436,27 +445,27 @@ async function comparar(slug, capturePath, ...opts) {
 }
 
 // Reamostragem bilinear (o fator aqui é sempre próximo de 1 ou menor).
-function resample(PNG, src, f) {
+function resample(PNG, src, fx, fy = fx) {
   const out = new PNG({
-    width: Math.round(src.width * f),
-    height: Math.round(src.height * f),
+    width: Math.round(src.width * fx),
+    height: Math.round(src.height * fy),
   });
   for (let y = 0; y < out.height; y++) {
-    const sy = Math.min(src.height - 1, (y + 0.5) / f - 0.5);
+    const sy = Math.min(src.height - 1, (y + 0.5) / fy - 0.5);
     const y0 = Math.max(0, Math.floor(sy)),
       y1 = Math.min(src.height - 1, y0 + 1),
-      fy = Math.max(0, sy - y0);
+      ty = Math.max(0, sy - y0);
     for (let x = 0; x < out.width; x++) {
-      const sx = Math.min(src.width - 1, (x + 0.5) / f - 0.5);
+      const sx = Math.min(src.width - 1, (x + 0.5) / fx - 0.5);
       const x0 = Math.max(0, Math.floor(sx)),
         x1 = Math.min(src.width - 1, x0 + 1),
-        fx = Math.max(0, sx - x0);
+        tx = Math.max(0, sx - x0);
       for (let c = 0; c < 4; c++) {
         const p = (yy, xx) => src.data[(yy * src.width + xx) * 4 + c];
-        const top = p(y0, x0) * (1 - fx) + p(y0, x1) * fx;
-        const bot = p(y1, x0) * (1 - fx) + p(y1, x1) * fx;
+        const top = p(y0, x0) * (1 - tx) + p(y0, x1) * tx;
+        const bot = p(y1, x0) * (1 - tx) + p(y1, x1) * tx;
         out.data[(y * out.width + x) * 4 + c] = Math.round(
-          top * (1 - fy) + bot * fy,
+          top * (1 - ty) + bot * ty,
         );
       }
     }

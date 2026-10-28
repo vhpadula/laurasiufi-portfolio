@@ -13,13 +13,15 @@ const c = PNG.sync.read(readFileSync(capPath));
 const R = node.absoluteRenderBounds ?? node.absoluteBoundingBox;
 const B = node.absoluteBoundingBox;
 const kf = f.width / R.width;
+const kfy = f.height / R.height; // exports altos: escala vertical um pouco diferente
 const kc = c.width / data.width;
+// Texto em coordenadas da página; no PNG do Figma (relativo aos render bounds da raiz) soma-se isto.
 const ofx = B.x - R.x - data.offset.x,
   ofy = B.y - R.y - data.offset.y;
 
-const L = (img, k, x, y, ox = 0, oy = 0) => {
+const L = (img, k, x, y, ox = 0, oy = 0, ky = k) => {
   const px = Math.round((x + ox) * k),
-    py = Math.round((y + oy) * k);
+    py = Math.round((y + oy) * ky);
   if (px < 0 || py < 0 || px >= img.width || py >= img.height) return 255;
   const i = (py * img.width + px) * 4;
   return img.data[i] * 0.3 + img.data[i + 1] * 0.59 + img.data[i + 2] * 0.11;
@@ -33,9 +35,16 @@ const out = {};
       continue;
     }
     if (n.k === "frame") walk(n.children ?? [], ox + n.x, oy + n.y);
-    if (n.k !== "text" || n.m) continue;
+    if (n.k !== "text" || n.m || n.runs.length !== 1) continue;
     const st = n.runs[0].style;
     const lh = st.lh ?? st.size * 1.3;
+    // Só casos limpos: uma linha, entrelinha normal (em linhas muito altas a região pega vizinhos).
+    if (
+      /\n|\r|\u2028/.test(n.runs[0].text.trim()) ||
+      n.h > lh * 1.5 ||
+      lh / st.size > 1.45
+    )
+      continue;
     const x0 = ox + n.x + data.offset.x,
       y0 = oy + n.y + data.offset.y;
     const w = Math.min(n.w, 500),
@@ -46,15 +55,15 @@ const out = {};
       for (let y = 0; y < h; y += 0.5)
         for (let x = 0; x < w; x += 0.5) {
           s += Math.abs(
-            L(f, kf, x0 + x, y0 + y, ofx - data.offset.x, ofy - data.offset.y) -
-              L(c, kc, x0 + x - data.offset.x, y0 + y - data.offset.y + dy),
+            L(f, kf, x0 + x, y0 + y, ofx, ofy, kfy) -
+              L(c, kc, x0 + x, y0 + y + dy),
           );
           m++;
         }
       return s / m;
     };
     let best = [Infinity, 0];
-    for (let dy = -16; dy <= 16; dy += 0.5) {
+    for (let dy = -8; dy <= 8; dy += 0.5) {
       const e = err(dy);
       if (e < best[0]) best = [e, dy];
     }
