@@ -14,8 +14,7 @@ Passo 4 — home aprovada. Próxima: About (`/about`). Árvores de About e cases
   `figma-plugin/` rodando numa **cópia do arquivo nos rascunhos do usuário** (o original é só leitura e
   plugins exigem edição; a cópia manteve os node-ids), depois
   `node scripts/figma.mjs importar <figma-export.zip>`. O zip fica na raiz e é ignorado pelo git.
-- Ainda não exportados pelo plugin: `49:77` (hover Work no About), `53:166` e `53:224` (hovers Itaú/Trama
-  da home — só conferidos por geometria).
+- Todos os frames da página SITE já foram exportados pelo plugin v2 (com imagens em `.figma/img/`).
 - Ferramentas:
   - `scripts/figma.mjs listar | baixar <id> <slug> [escala] | importar <zip> | comparar <slug> <png> [--escala=1]`
   - `scripts/capturar.mjs <rota> <saida.png> [largura] [--hover=<seletor>] [--dpr=2]`
@@ -23,10 +22,11 @@ Passo 4 — home aprovada. Próxima: About (`/about`). Árvores de About e cases
 ## Páginas
 | Frame | Rota | Desktop (faixas sem fotos > 0,5%) | Mobile | Status |
 | --- | --- | --- | --- | --- |
-| pag 1 `49:22` (1440×5934) | `/` | 1/119 (pior 1,44%) · diferença total 1,30% | adaptado | **aprovada** |
-| hover TuttiFree `51:107` | `/` | 1/119 (pior 1,32%) · total 1,17% | — | medido |
-| hover About `15:171` | `/` | 1/119 (pior 1,44%) · total 1,30% | — | medido |
-| hover Itaú `53:166` / Trama `53:224` | `/` | geometria no DOM = Figma (sem PNG de referência) | — | conferido |
+| pag 1 `49:22` (1440×5934) | `/` | **0/119** · diferença total 1,12% | adaptado | **aprovada** |
+| hover TuttiFree `51:107` | `/` | 0/119 · total 1,31% | — | medido |
+| hover Itaú `53:166` | `/` | 0/119 · total 1,12% | — | medido |
+| hover Trama `53:224` | `/` | 0/119 · total 1,15% | — | medido |
+| hover About `15:171` | `/` | 0/119 · total 1,12% | — | medido |
 | pag 2 `15:224` (1440×3791) | `/about` | – | – | próxima (árvore + PNG 2x ok) |
 | itaú `18:5` | `/work/itau` | – | – | árvore ok; PNG a 0,78x (limite de 32768px de altura) |
 | trama `29:33550` | `/work/trama` | – | – | árvore ok; PNG a 0,79x (limite de 32768px de altura) |
@@ -40,13 +40,12 @@ Estados de interação (diff de árvore entre frames):
 - `53:224` hover Trama: celular 891×1122 em (211,4034), faixa bege 432, "more about" 40px.
 
 ### Como medir (por que "sem fotos")
-O export de 2x da home passa de ~32 MP e o Figma o reduz (saiu a 1,981x). `comparar` detecta a escala
-real; com `--escala=1` leva as duas imagens a 1x. Fotos (nós com fill IMAGE) nunca batem pixel a pixel
+Referências da home e do About vêm do plugin, a 2x de verdade (o export da API REST era reduzido a
+1,981x por passar de ~32 MP). `comparar` detecta a escala real de qualquer forma; `--escala=1` leva as
+duas imagens a 1x quando a referência vier reduzida (caso de Itaú e Trama, limitados a 32768px de altura). Fotos (nós com fill IMAGE) nunca batem pixel a pixel
 porque Figma e Chrome reamostram com filtros diferentes (testado: desligar a otimização do
 `next/image` não muda o número), então o critério de 0,5% é aplicado às faixas **sem fotos**.
 
-Faixa restante (1750–1800, e 1600–1650 no hover): borda de 1px do retângulo do logo em coordenada
-fracionária (1752,37) — o Chrome encaixa no pixel inteiro, o Figma antialiasa. Subpixel, não layout.
 
 ## Para perguntar ao design
 1. **Mobile:** não há frame no Figma. Hoje a composição escala proporcionalmente e só os textos crescem
@@ -89,8 +88,11 @@ Cinzas escuros #141414, #2c2c2c, #2b2b35, #2d3047: **mantidos como no Figma** (d
 - Fonte "Content" (e-mail) só tem dígitos/pontuação; as letras caem em Noto Sans, como no Figma
   (medido: largura 420 vs 422).
 - `text-rendering: geometricPrecision`: sem isso o Chrome arredonda avanços e textos crescem até 5px.
-- Calibração vertical por estilo de texto (`text(…, dy)`): o Chrome desenha Darker Grotesque, Notable e
-  Content 1–2px mais alto que o Figma; medido por região contra o export.
+- Calibração vertical por estilo de texto (`text(…, dy)`): o Chrome desenha essas fontes mais alto que o
+  Figma. Medido a 2x contra o export do plugin: Contrail 0, Darker Grotesque 48px 0,75, Notable 36/64px 1,
+  Notable 128px 1,5, Content 1 (px do Figma).
+- `capturar.mjs` usa viewport da altura da página: com o screenshot de página inteira, o hover se perdia
+  ao rolar de volta ao topo (o hover de Itaú/Trama não estava sendo capturado).
 - Linhas do Figma: o traço fica de um lado só da geometria (y local negativo), não centrado.
 - Classes de canvas em `@layer components` para que utilitários do Tailwind as sobrescrevam.
 - `scripts/figma.mjs` reaproveita o `.json` salvo e aborta 429 com espera > 5 min.
