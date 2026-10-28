@@ -1,7 +1,7 @@
 # Progresso — portfólio Figma → Next.js
 
 ## Etapa atual
-Passo 4 — home aprovada. Próxima: About (`/about`). Árvores de About e cases importadas pelo plugin.
+Passo 4 — home aprovada; About implementado e medido, aguardando aprovação. Depois: cases.
 
 ## Ambiente
 - Node v22.22.2, npm 12.0.2 · Next 16.4.3 (Turbopack, App Router, `src/`), React 19.3, Tailwind 4
@@ -27,7 +27,8 @@ Passo 4 — home aprovada. Próxima: About (`/about`). Árvores de About e cases
 | hover Itaú `53:166` | `/` | 0/119 · total 1,12% | — | medido |
 | hover Trama `53:224` | `/` | 0/119 · total 1,15% | — | medido |
 | hover About `15:171` | `/` | 0/119 · total 1,12% | — | medido |
-| pag 2 `15:224` (1440×3791) | `/about` | – | – | próxima (árvore + PNG 2x ok) |
+| pag 2 `15:224` (1440×3791) | `/about` | **0/76** com o texto original do Figma · 5/76 com as correções de digitação (só nos 4 parágrafos corrigidos) · total 2,46% | adaptado | aguardando aprovação |
+| hover Work `49:77` | `/about` | cor e posição do "Work" iguais ao Figma | — | medido |
 | itaú `18:5` | `/work/itau` | – | – | árvore ok; PNG a 0,78x (limite de 32768px de altura) |
 | trama `29:33550` | `/work/trama` | – | – | árvore ok; PNG a 0,79x (limite de 32768px de altura) |
 | tuttifree `47:22` | `/work/tuttifree` | – | – | árvore + PNG 2x ok |
@@ -69,6 +70,8 @@ porque Figma e Chrome reamostram com filtros diferentes (testado: desligar a oti
 - `alt` das fotos: escritos a partir dos nomes das camadas (ex.: "pao batata doce" → "Sweet potato bread").
 - Links dos cards (`/work/tuttifree`, `/work/itau`, `/work/trama`) apontam para páginas ainda não feitas.
 - "Work" no menu aponta para `/`.
+- About: `alt` do retrato ("Portrait of Laura Siufi") escrito por mim; as duas ilustrações são
+  decorativas (`alt=""`). O nome "Laura Siufi" no topo do About leva para `/`.
 
 ## Quase-duplicatas de cor
 Cinzas escuros #141414, #2c2c2c, #2b2b35, #2d3047: **mantidos como no Figma** (decisão do usuário).
@@ -94,5 +97,11 @@ Cinzas escuros #141414, #2c2c2c, #2b2b35, #2d3047: **mantidos como no Figma** (d
 - `capturar.mjs` usa viewport da altura da página: com o screenshot de página inteira, o hover se perdia
   ao rolar de volta ao topo (o hover de Itaú/Trama não estava sendo capturado).
 - Linhas do Figma: o traço fica de um lado só da geometria (y local negativo), não centrado.
+- Fotos giradas do About: `relativeTransform` do Figma vira `matrix()` com origem no canto; recorte CROP
+  via `CroppedImage` (a imagem inteira mede 1/sx × 1/sy do quadro). Elementos que saem do frame ficam
+  dentro de um quadro com `overflow: hidden`, para não aparecer em telas > 1440.
+- About no mobile: parágrafos crescem para 56 (não 64) e "Meanwhile…"/"I like…" sobem/alargam para caber
+  na faixa de fundo (senão a última linha ficava preto no preto / creme no branco).
+- Prettier fixado no projeto (`npm run format`).
 - Classes de canvas em `@layer components` para que utilitários do Tailwind as sobrescrevam.
 - `scripts/figma.mjs` reaproveita o `.json` salvo e aborta 429 com espera > 5 min.
