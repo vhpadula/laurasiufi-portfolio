@@ -35,6 +35,10 @@ await page.waitForLoadState("networkidle");
 await page.evaluate(() =>
   Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => (i.onload = i.onerror = r))))),
 );
+// Viewport da altura da página: assim o hover não se perde quando o screenshot de página inteira
+// rola de volta ao topo (o mouse fica numa coordenada da janela, não do documento).
+const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+await page.setViewportSize({ width: Number(width), height: fullHeight });
 if (hover) {
   await page.hover(hover);
   await page.waitForTimeout(100);
