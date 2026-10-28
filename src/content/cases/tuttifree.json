@@ -1,0 +1,2458 @@
+{
+  "slug": "tuttifree",
+  "source": "47:22",
+  "page": "47:22",
+  "width": 1440,
+  "height": 15004,
+  "offset": { "x": 0, "y": 0 },
+  "bg": "#f9f6f2",
+  "nodes": [
+    {
+      "id": "47:23",
+      "name": "Rectangle 276",
+      "x": 62,
+      "y": 8968,
+      "w": 905,
+      "h": 365,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:24",
+      "name": "Vector 7",
+      "k": "svg",
+      "x": 0,
+      "y": 5346.5,
+      "w": 1112,
+      "h": 1443.5,
+      "src": "/images/cases/tuttifree/svg/47-24.svg"
+    },
+    {
+      "id": "47:25",
+      "name": "Rectangle 75",
+      "x": 557,
+      "y": 6152,
+      "w": 754,
+      "h": 234,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:26",
+      "name": "mockup (1) 2",
+      "x": -200,
+      "y": 5799,
+      "w": 1286,
+      "h": 965,
+      "image": {
+        "src": "/images/cases/tuttifree/79e4a298e585b9b4ea61454e14cfa4508dff67df.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:27",
+      "name": "Resultado final e aprovado",
+      "x": 557,
+      "y": 6686,
+      "w": 326,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Resultado final e aprovado",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:28",
+      "name": "Rectangle 73",
+      "x": -35,
+      "y": 6597,
+      "w": 206,
+      "h": 89,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:29",
+      "name": "Vector 8",
+      "k": "svg",
+      "x": 0,
+      "y": 367,
+      "w": 939.5,
+      "h": 785,
+      "src": "/images/cases/tuttifree/svg/47-29.svg"
+    },
+    {
+      "id": "47:30",
+      "name": "Rectangle 67",
+      "x": 787.64,
+      "y": 786,
+      "w": 390,
+      "h": 339,
+      "m": [0.97411, 0.22609, -0.22609, 0.97411],
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:31",
+      "name": "Rectangle 71",
+      "x": 989,
+      "y": 62,
+      "w": 304,
+      "h": 1006,
+      "border": { "w": 4, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:32",
+      "name": "Rectangle 68",
+      "x": -71,
+      "y": 290,
+      "w": 135,
+      "h": 222,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:33",
+      "name": "Rectangle 69",
+      "x": -4,
+      "y": 367,
+      "w": 1444,
+      "h": 257,
+      "bg": "#eead44",
+      "k": "box"
+    },
+    {
+      "id": "47:34",
+      "name": "Rectangle 70",
+      "x": 570,
+      "y": 665,
+      "w": 825,
+      "h": 144,
+      "bg": "#f9f6f2",
+      "border": { "w": 2, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:35",
+      "name": "image 29",
+      "x": -406,
+      "y": 16,
+      "w": 1536,
+      "h": 1024,
+      "image": {
+        "src": "/images/cases/tuttifree/69175d3114fc35d318044e9a36c0a5ec7fe2fdff.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:36",
+      "name": "tuttifree - Brand Strategy e Identidade Visual",
+      "x": 743,
+      "y": 443,
+      "w": 643,
+      "h": 104,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "tuttifree - Brand Strategy e Identidade Visual",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#f9f6f2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:37",
+      "name": "Contexto e desafio",
+      "x": 100,
+      "y": 1193,
+      "w": 643,
+      "h": 52,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Contexto e desafio",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:38",
+      "name": "Redefinindo a identidade de uma marca de alimentos inclusivos.",
+      "x": 808,
+      "y": 707,
+      "w": 550,
+      "h": 60,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "Redefinindo a identidade de uma marca de alimentos inclusivos.",
+          "style": {
+            "family": "Chivo",
+            "weight": 700,
+            "size": 24,
+            "ls": 1.92,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:39",
+      "name": "A Tutti Free nasceu com o propósito de tornar a alimentação inclusiva mais saborosa, acolhedora e acessível. O desafio foi repensar sua identidade visual para comunicar esses valores com mais clareza, fortalecer seu reconhecimento e criar uma linguagem consistente para seus produtos.",
+      "x": 100,
+      "y": 1334,
+      "w": 796,
+      "h": 204,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "A Tutti Free nasceu com o propósito de tornar a alimentação inclusiva mais saborosa, acolhedora e acessível. O desafio foi repensar sua identidade visual para comunicar esses valores com mais clareza, fortalecer seu reconhecimento e criar uma linguagem consistente para seus produtos.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:40",
+      "name": "Redesign do logotipo",
+      "x": 664,
+      "y": 1820,
+      "w": 643,
+      "h": 52,
+      "k": "text",
+      "align": "RIGHT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": " Redesign do logotipo",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:41",
+      "name": "Line 7",
+      "x": -57,
+      "y": 1152,
+      "w": 436,
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:42",
+      "name": "Line 8",
+      "x": 395,
+      "y": 1277,
+      "w": 436,
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:43",
+      "name": "Line 9",
+      "x": 568,
+      "y": 1913,
+      "w": 436,
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:44",
+      "name": "mockup (3) (1) 1",
+      "x": 847,
+      "y": 1068,
+      "w": 690,
+      "h": 687,
+      "image": {
+        "src": "/images/cases/tuttifree/23c38ae2b2bb3dc78e9950772f1bd0ab9eea305a.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:45",
+      "name": "Line 10",
+      "x": 1004,
+      "y": 1781,
+      "w": 436,
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:47",
+      "name": "image 1",
+      "x": 355,
+      "y": 2022,
+      "w": 730.52,
+      "h": 412.06,
+      "image": {
+        "src": "/images/cases/tuttifree/96ee31d876e564c1d9cc639e54725f5c811772d3.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "radius": 361,
+      "k": "box"
+    },
+    {
+      "id": "47:48",
+      "name": "Design antigo",
+      "x": 642,
+      "y": 2475,
+      "w": 156,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "Design antigo",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:49",
+      "name": "INSPIRAÇÃO",
+      "x": 647,
+      "y": 3423,
+      "w": 148,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "INSPIRAÇÃO",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:50",
+      "name": "Design System",
+      "x": 78,
+      "y": 6959,
+      "w": 805,
+      "h": 52,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Design System",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:51",
+      "name": "A Tutti Free nasceu com o propósito de tornar a alimentação inclusiva mais saborosa, acolhedora e acessível. O desafio foi repensar sua identidade visual para comunicar esses valores com mais clareza, fortalecer seu reconhecimento e criar uma linguagem consistente para seus produtos.",
+      "x": 90,
+      "y": 7101,
+      "w": 1261,
+      "h": 204,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "A Tutti Free nasceu com o propósito de tornar a alimentação inclusiva mais saborosa, acolhedora e acessível. O desafio foi repensar sua identidade visual para comunicar esses valores com mais clareza, fortalecer seu reconhecimento e criar uma linguagem consistente para seus produtos.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:52",
+      "name": "Line 8",
+      "x": 275,
+      "y": 7055,
+      "w": 282.01,
+      "m": [0.99997, 0.00709, -0.00709, 0.99997],
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:53",
+      "name": "Line 16",
+      "x": -63,
+      "y": 6922,
+      "w": 338,
+      "m": [1, 0.00296, -0.00296, 1],
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:54",
+      "name": "image 31",
+      "x": 411,
+      "y": 2589,
+      "w": 619,
+      "h": 808,
+      "image": {
+        "src": "/images/cases/tuttifree/052cb4d688caff4bb830708c309f8646539b2e53.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.2102, 0, 0.02041, 0, 0.257, 0.12279]
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:55",
+      "name": "Elementos da natureza, trigo, terra e o conceto de alimento como cuidado e acolhimento.",
+      "x": 213,
+      "y": 3469,
+      "w": 1014,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Elementos da natureza, trigo, terra e o conceto de alimento como cuidado e acolhimento.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:56",
+      "name": "image 32",
+      "x": 321,
+      "y": 3590,
+      "w": 798,
+      "h": 1001,
+      "image": {
+        "src": "/images/cases/tuttifree/052cb4d688caff4bb830708c309f8646539b2e53.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.27143, 0, 0.2398, 0, 0.31918, 0.07974]
+      },
+      "radius": 20,
+      "k": "box"
+    },
+    {
+      "id": "47:57",
+      "name": "RASCUNHOS",
+      "x": 647,
+      "y": 4634,
+      "w": 146,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "RASCUNHOS",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:58",
+      "name": "Exploração de formas e tipografia.",
+      "x": 521,
+      "y": 4680,
+      "w": 398,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Exploração de formas e tipografia.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:59",
+      "name": "CONSTRUÇÃO",
+      "x": 640,
+      "y": 5486,
+      "w": 161,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "CONSTRUÇÃO",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:60",
+      "name": "Definição da estrutura e proporções.",
+      "x": 506,
+      "y": 5532,
+      "w": 429,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Definição da estrutura e proporções.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:61",
+      "name": "LOGOTIPO",
+      "x": 312,
+      "y": 5640,
+      "w": 119,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "LOGOTIPO",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:62",
+      "name": "Tipografia moderna e orgânica com traços suaves e bem equilibrados.",
+      "x": 177,
+      "y": 5686,
+      "w": 429,
+      "h": 92,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Tipografia moderna e orgânica com traços suaves e bem equilibrados.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:63",
+      "name": "SIMBOLO",
+      "x": 995,
+      "y": 5663,
+      "w": 117,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "SIMBOLO\r",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:64",
+      "name": "Baseado na forma de trigo.",
+      "x": 895,
+      "y": 5709,
+      "w": 316,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Baseado na forma de trigo.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:65",
+      "name": "Line 17",
+      "x": 91,
+      "y": 5602,
+      "w": 1258,
+      "m": [1, 0.00079, -0.00079, 1],
+      "k": "line",
+      "weight": 1,
+      "color": "#e1c4a7"
+    },
+    {
+      "id": "47:66",
+      "name": "Line 18",
+      "x": 91,
+      "y": 5814,
+      "w": 1258,
+      "m": [1, 0.00079, -0.00079, 1],
+      "k": "line",
+      "weight": 1,
+      "color": "#e1c4a7"
+    },
+    {
+      "id": "47:67",
+      "name": "Line 19",
+      "x": 720,
+      "y": 5640,
+      "w": 138,
+      "m": [0, 1, -1, 0],
+      "k": "line",
+      "weight": 1,
+      "color": "#e1c4a7"
+    },
+    {
+      "id": "47:68",
+      "name": "Rectangle 74",
+      "x": 0,
+      "y": 5306,
+      "w": 100,
+      "h": 100,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:69",
+      "name": "image 33",
+      "x": 54,
+      "y": 4815,
+      "w": 1332,
+      "h": 628,
+      "image": {
+        "src": "/images/cases/tuttifree/052cb4d688caff4bb830708c309f8646539b2e53.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.47584, 0, 0.52411, 0, 0.21031, 0.09645]
+      },
+      "radius": 20,
+      "k": "box"
+    },
+    {
+      "id": "47:72",
+      "name": "EEAD44",
+      "x": 407,
+      "y": 7795,
+      "w": 115,
+      "h": 180,
+      "bg": "#eead44",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:73",
+      "name": "45050C",
+      "x": 535,
+      "y": 7795,
+      "w": 115,
+      "h": 180,
+      "bg": "#45050c",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:74",
+      "name": "D5AD87",
+      "x": 279,
+      "y": 7795,
+      "w": 115,
+      "h": 180,
+      "bg": "#d5ad87",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:76",
+      "name": "A17F81",
+      "x": 535,
+      "y": 7988,
+      "w": 115,
+      "h": 100,
+      "bg": "#a17f81",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:77",
+      "name": "E1C4A7",
+      "x": 279,
+      "y": 7988,
+      "w": 115,
+      "h": 100,
+      "bg": "#e1c4a7",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:79",
+      "name": "FFFFFF",
+      "x": 407,
+      "y": 7643,
+      "w": 115,
+      "h": 100,
+      "bg": "#ffffff",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:80",
+      "name": "F9F5F2",
+      "x": 535,
+      "y": 7643,
+      "w": 115,
+      "h": 100,
+      "bg": "#f9f5f2",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:81",
+      "name": "1F1F1E",
+      "x": 279,
+      "y": 7643,
+      "w": 115,
+      "h": 102,
+      "bg": "#1f1f1e",
+      "radius": 20,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:82",
+      "name": "000000",
+      "x": 198,
+      "y": 7643,
+      "w": 53,
+      "h": 443,
+      "bg": "#000000",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:83",
+      "name": "COLOR PALLETE",
+      "x": 197,
+      "y": 7393,
+      "w": 183,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "COLOR PALLETE",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:84",
+      "name": "Cores neutras, naturais e de escolha do cliente.",
+      "x": 197,
+      "y": 7439,
+      "w": 452,
+      "h": 92,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Cores neutras, naturais e de escolha do cliente.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:85",
+      "name": "Rectangle 164",
+      "x": 176,
+      "y": 7354,
+      "w": 960,
+      "h": 231,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:86",
+      "name": "Rectangle 165",
+      "x": 681,
+      "y": 7285,
+      "w": 755,
+      "h": 875,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:87",
+      "name": "TYPOGRAPHY",
+      "x": 103,
+      "y": 8423,
+      "w": 156,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "TYPOGRAPHY",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:88",
+      "name": "Cores neutras, naturais e de escolha do cliente.",
+      "x": 103,
+      "y": 8469,
+      "w": 452,
+      "h": 92,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Cores neutras, naturais e de escolha do cliente.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:89",
+      "name": "Rectangle 166",
+      "x": 82,
+      "y": 8384,
+      "w": 960,
+      "h": 231,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:90",
+      "name": "Rectangle 167",
+      "x": 604,
+      "y": 8163,
+      "w": 755,
+      "h": 680,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:91",
+      "name": "Rectangle 275",
+      "x": -118,
+      "y": 8918,
+      "w": 625,
+      "h": 875,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:92",
+      "name": "PRIMARY #EEAD44  SECONDARY #45050C  NEUTRAL #E1C4A7  SUPPORT #D5AD87  TEXT #1F1F1E  Textos principais / ícones / alto contraste",
+      "x": 780,
+      "y": 7338,
+      "w": 741,
+      "h": 585,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "PRIMARY\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#EEAD44 \n",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "SECONDARY\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#45050C  \n",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "NEUTRAL\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#E1C4A7 \n",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "SUPPORT\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#D5AD87 \n",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "TEXT\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#1F1F1E  Textos principais / ícones / alto contraste",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:93",
+      "name": "ADDITIONAL #F9F5F2",
+      "x": 780,
+      "y": 7967,
+      "w": 741,
+      "h": 78,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "ADDITIONAL\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "#F9F5F2",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:94",
+      "name": "#A17F81 ",
+      "x": 1046,
+      "y": 7731,
+      "w": 741,
+      "h": 78,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "#A17F81 ",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:95",
+      "name": "Rectangle 155",
+      "x": 915,
+      "y": 7385,
+      "w": 329,
+      "h": 21,
+      "bg": "#eead44",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:96",
+      "name": "Rectangle 156",
+      "x": 915,
+      "y": 7502,
+      "w": 329,
+      "h": 21,
+      "bg": "#45050c",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:97",
+      "name": "Rectangle 157",
+      "x": 915,
+      "y": 7619,
+      "w": 329,
+      "h": 21,
+      "bg": "#e1c4a7",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:98",
+      "name": "Rectangle 158",
+      "x": 915,
+      "y": 7740,
+      "w": 84,
+      "h": 21,
+      "bg": "#d5ad87",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:99",
+      "name": "Rectangle 161",
+      "x": 915,
+      "y": 8014,
+      "w": 84,
+      "h": 21,
+      "bg": "#f9f5f2",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:100",
+      "name": "Rectangle 160",
+      "x": 1160,
+      "y": 7740,
+      "w": 84,
+      "h": 21,
+      "bg": "#a17f81",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:101",
+      "name": "#FFFFFF ",
+      "x": 1046,
+      "y": 8006,
+      "w": 741,
+      "h": 78,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "#FFFFFF ",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:102",
+      "name": "Rectangle 162",
+      "x": 1160,
+      "y": 8015,
+      "w": 84,
+      "h": 21,
+      "bg": "#ffffff",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:103",
+      "name": "#000000 ",
+      "x": 780,
+      "y": 8057,
+      "w": 741,
+      "h": 38,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "#000000 ",
+          "style": {
+            "family": "Jura",
+            "weight": 600,
+            "size": 24,
+            "lh": 39,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:104",
+      "name": "Rectangle 163",
+      "x": 915,
+      "y": 8064,
+      "w": 329,
+      "h": 21,
+      "bg": "#000000",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:105",
+      "name": "Rectangle 159",
+      "x": 915,
+      "y": 7853,
+      "w": 329,
+      "h": 21,
+      "bg": "#1f1f1e",
+      "radius": 10,
+      "shadow": [
+        {
+          "inset": false,
+          "x": 0,
+          "y": 4,
+          "blur": 4,
+          "spread": 0,
+          "color": "rgb(0 0 0 / 0.25)"
+        }
+      ],
+      "k": "box"
+    },
+    {
+      "id": "47:106",
+      "name": "Tipografia do LOGO H1 Chivo - Regular H2 Revalia - Regular H3 Gruppo - Regular",
+      "x": 775,
+      "y": 9523,
+      "w": 536,
+      "h": 296,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "Tipografia do LOGO\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 32,
+            "lh": 74,
+            "ls": 1.92,
+            "color": "#45050c"
+          }
+        },
+        {
+          "text": "H1 Chivo - Regular\r\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 36,
+            "lh": 74,
+            "ls": 2.16,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H2 Revalia - Regular\r\n",
+          "style": {
+            "family": "Revalia",
+            "weight": 400,
+            "size": 36,
+            "lh": 74,
+            "ls": 2.16,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H3 Gruppo - Regular\r",
+          "style": {
+            "family": "Gruppo",
+            "weight": 400,
+            "size": 36,
+            "lh": 74,
+            "ls": 2.16,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:107",
+      "name": "Rectangle 274",
+      "x": 645,
+      "y": 9513,
+      "w": 704,
+      "h": 316,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:108",
+      "name": "Tipografia do SITE H1 Holtwood One SC H2 Cinzel - Black H3 Cinzel - Bold H4 Cinzel - Regular H5 Jura - Regular",
+      "x": 156,
+      "y": 8918,
+      "w": 484,
+      "h": 401,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "Tipografia do SITE\r\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "ls": 1.44,
+            "color": "#45050c"
+          }
+        },
+        {
+          "text": "\r\n",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 32,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H1 Holtwood One SC \n",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "lh": 64,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H2 Cinzel - Black\r\n",
+          "style": {
+            "family": "Cinzel",
+            "weight": 900,
+            "size": 32,
+            "lh": 64,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H3 Cinzel - Bold\r\n",
+          "style": {
+            "family": "Cinzel",
+            "weight": 700,
+            "size": 32,
+            "lh": 64,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H4 Cinzel - Regular\r\n",
+          "style": {
+            "family": "Cinzel",
+            "weight": 400,
+            "size": 32,
+            "lh": 64,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "H5 Jura - Regular",
+          "style": {
+            "family": "Jura",
+            "weight": 400,
+            "size": 32,
+            "lh": 64,
+            "ls": 1.92,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:109",
+      "name": "pao aveia e sementes",
+      "x": 863,
+      "y": 6187,
+      "w": 523,
+      "h": 736,
+      "image": {
+        "src": "/images/cases/tuttifree/11cde082784c41dfd9dc2cdcaffdd0ca6ab16c85.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:110",
+      "name": "COMPONENTES",
+      "x": 196,
+      "y": 10066,
+      "w": 180,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "COMPONENTES",
+          "style": {
+            "family": "Chivo",
+            "weight": 500,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:111",
+      "name": "Elementos gráficos",
+      "x": 196,
+      "y": 10112,
+      "w": 452,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Elementos gráficos ",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:112",
+      "name": "Rectangle 277",
+      "x": 175,
+      "y": 10027,
+      "w": 960,
+      "h": 172,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:113",
+      "name": "Rectangle 278",
+      "x": 685,
+      "y": 9899,
+      "w": 755,
+      "h": 680,
+      "bg": "#f9f6f2",
+      "k": "box"
+    },
+    {
+      "id": "47:114",
+      "name": "pao batata doce",
+      "x": 214,
+      "y": 11373,
+      "w": 322,
+      "h": 453,
+      "m": [0, -1, 1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/46fb36a2e19bb2396e172a8d9e3965d1532ee656.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:115",
+      "name": "pao grão de bico",
+      "x": 202,
+      "y": 11123,
+      "w": 339,
+      "h": 477,
+      "m": [0, -1, 1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/92b35a763e81772d6ae80537a0bfb3729598841e.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:116",
+      "name": "pao aveia e sementes",
+      "x": 185,
+      "y": 10875,
+      "w": 363,
+      "h": 511,
+      "m": [0, -1, 1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/11cde082784c41dfd9dc2cdcaffdd0ca6ab16c85.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:117",
+      "name": "pão simples",
+      "x": 185,
+      "y": 10602,
+      "w": 391,
+      "h": 530,
+      "m": [0, -1, 1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/3183afee9220522a330de65d53d284d2c6640703.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:118",
+      "name": "pão australiano",
+      "x": 1071,
+      "y": 11402,
+      "w": 395,
+      "h": 749,
+      "m": [0, 1, -1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/e4b28a0347f2f1d6da5d777df01251f2cf015d69.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:119",
+      "name": "Aplicações na marca",
+      "x": 110,
+      "y": 11910,
+      "w": 805,
+      "h": 52,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Aplicações na marca",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:120",
+      "name": "O redesign da Tutti Free buscou construir uma identidade visual mais consistente, aproximando o propósito da marca de sua comunicação e de suas embalagens. O resultado é uma proposta que combina elementos naturais, cores acolhedoras e uma linguagem visual pensada para transmitir cuidado, confiança e inclusão.",
+      "x": 110,
+      "y": 12052,
+      "w": 1261,
+      "h": 204,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "O redesign da Tutti Free buscou construir uma identidade visual mais consistente, aproximando o propósito da marca de sua comunicação e de suas embalagens. O resultado é uma proposta que combina elementos naturais, cores acolhedoras e uma linguagem visual pensada para transmitir cuidado, confiança e inclusão.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:121",
+      "name": "Line 8",
+      "x": 307,
+      "y": 12006,
+      "w": 282.01,
+      "m": [0.99997, 0.00709, -0.00709, 0.99997],
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:122",
+      "name": "Line 16",
+      "x": -31,
+      "y": 11873,
+      "w": 338,
+      "m": [1, 0.00296, -0.00296, 1],
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:123",
+      "name": "image 35",
+      "x": 695,
+      "y": 12323,
+      "w": 710,
+      "h": 779,
+      "image": {
+        "src": "/images/cases/tuttifree/112564f0337e01a51ca1411bfc3c0824f727cb79.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:124",
+      "name": "Exemplo de rótulo feito",
+      "x": 587,
+      "y": 13134,
+      "w": 267,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Exemplo de rótulo feito",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:125",
+      "name": "Site desenvolvido: EM BREVE",
+      "x": 551,
+      "y": 14083,
+      "w": 338,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Site desenvolvido: ",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#000000"
+          }
+        },
+        {
+          "text": "EM BREVE",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#eead44"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:126",
+      "name": "image 36",
+      "x": 64,
+      "y": 13208,
+      "w": 1312,
+      "h": 875,
+      "image": {
+        "src": "/images/cases/tuttifree/d9332afb7849d677e0c439e456b6f4ad862f47ec.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:127",
+      "name": "Mais do que alimentar, incluir.",
+      "x": 89,
+      "y": 14288,
+      "w": 805,
+      "h": 52,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Mais do que alimentar, incluir.",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 32,
+            "ls": 2.56,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:128",
+      "name": "A Tutti Free foi uma oportunidade de transformar um propósito em identidade visual, conectando estratégia, design e cuidado em cada detalhe.",
+      "x": 271,
+      "y": 14451,
+      "w": 892,
+      "h": 204,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "NONE",
+      "runs": [
+        {
+          "text": "A Tutti Free foi uma oportunidade de transformar um propósito em identidade visual, conectando estratégia, design e cuidado em cada detalhe.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:129",
+      "name": "Line 20",
+      "x": 428,
+      "y": 14383,
+      "w": 413,
+      "m": [1, -0.00001, 0.00001, 1],
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:130",
+      "name": "Line 21",
+      "x": -52,
+      "y": 14251,
+      "w": 480,
+      "k": "line",
+      "weight": 4,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:131",
+      "name": "O projeto reforça como o design pode aproximar marcas e pessoas, tornando sua comunicação mais consistente, acolhedora e significativa.",
+      "x": 272,
+      "y": 14588,
+      "w": 898,
+      "h": 92,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "O projeto reforça como o design pode aproximar marcas e pessoas, tornando sua comunicação mais consistente, acolhedora e significativa.",
+          "style": {
+            "family": "Chivo",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:132",
+      "name": "Porque inclusão também se constrói à mesa.",
+      "x": 363,
+      "y": 14748,
+      "w": 709,
+      "h": 46,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "Porque inclusão também se constrói à mesa.",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 24,
+            "lh": 45.84,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:133",
+      "name": "Contemporânea. Legível. Geométrica.",
+      "x": 651,
+      "y": 8587,
+      "w": 1199,
+      "h": 201,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Contemporânea.\nLegível.\nGeométrica.",
+          "style": {
+            "family": "Jura",
+            "weight": 500,
+            "size": 40,
+            "lh": 67.45,
+            "color": "#eead44"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:134",
+      "name": "Rectangle 270",
+      "x": 649,
+      "y": 8366.95,
+      "w": 205,
+      "h": 202,
+      "border": { "w": 1, "color": "#eead44", "align": "INSIDE" },
+      "k": "box"
+    },
+    {
+      "id": "47:135",
+      "name": "Aa",
+      "x": 641,
+      "y": 8269,
+      "w": 427,
+      "h": 407,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "WIDTH_AND_HEIGHT",
+      "runs": [
+        {
+          "text": "Aa",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 250,
+            "color": "#45050c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:136",
+      "name": "Line 38",
+      "x": 581,
+      "y": 8384.95,
+      "w": 433,
+      "k": "line",
+      "weight": 1,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:137",
+      "name": "Line 39",
+      "x": 722,
+      "y": 8569,
+      "w": 433,
+      "k": "line",
+      "weight": 1,
+      "color": "#eead44"
+    },
+    {
+      "id": "47:138",
+      "name": "Vector 47",
+      "k": "svg",
+      "x": 872.61,
+      "y": 8197,
+      "w": 292.69,
+      "h": 170.91,
+      "src": "/images/cases/tuttifree/svg/47-138.svg"
+    },
+    {
+      "id": "47:139",
+      "name": "Ellipse 142",
+      "x": 863,
+      "y": 8352.95,
+      "w": 24,
+      "h": 24,
+      "bg": "#eead44",
+      "radius": "50%",
+      "k": "box"
+    },
+    {
+      "id": "47:140",
+      "name": "Vector 48",
+      "k": "svg",
+      "x": 810.54,
+      "y": 8767.27,
+      "w": 320.5,
+      "h": 90.57,
+      "src": "/images/cases/tuttifree/svg/47-140.svg"
+    },
+    {
+      "id": "47:141",
+      "name": "Ellipse 143",
+      "x": 810.4,
+      "y": 8832.34,
+      "w": 24,
+      "h": 24,
+      "m": [0.82967, -0.55825, -0.55825, -0.82967],
+      "bg": "#eead44",
+      "radius": "50%",
+      "k": "box"
+    },
+    {
+      "id": "47:142",
+      "name": "Rectangle 271",
+      "x": 1014,
+      "y": 8233,
+      "w": 355,
+      "h": 110,
+      "bg": "#e1c4a7",
+      "radius": 30,
+      "k": "box"
+    },
+    {
+      "id": "47:143",
+      "name": "Holtwood One SC Para textos de destaque",
+      "x": 1047,
+      "y": 8250,
+      "w": 288,
+      "h": 75,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Holtwood One SC\n",
+          "style": {
+            "family": "Holtwood One SC",
+            "weight": 400,
+            "size": 24,
+            "lh": 37,
+            "color": "#333333"
+          }
+        },
+        {
+          "text": "Para textos de destaque",
+          "style": {
+            "family": "Jura",
+            "weight": 500,
+            "size": 24,
+            "lh": 37,
+            "color": "#333333"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:144",
+      "name": "Rectangle 272",
+      "x": 1084,
+      "y": 8598,
+      "w": 200,
+      "h": 156,
+      "bg": "#e1c4a7",
+      "radius": 30,
+      "k": "box"
+    },
+    {
+      "id": "47:145",
+      "name": "Jura Para textos e informações",
+      "x": 1106,
+      "y": 8616,
+      "w": 156,
+      "h": 114,
+      "k": "text",
+      "align": "LEFT",
+      "valign": "TOP",
+      "resize": "HEIGHT",
+      "runs": [
+        {
+          "text": "Jura\n",
+          "style": {
+            "family": "Jura",
+            "weight": 700,
+            "size": 32,
+            "lh": 37,
+            "color": "#333333"
+          }
+        },
+        {
+          "text": "Para textos e informações",
+          "style": {
+            "family": "Jura",
+            "weight": 500,
+            "size": 24,
+            "lh": 37,
+            "color": "#333333"
+          }
+        }
+      ]
+    },
+    {
+      "id": "47:146",
+      "name": "image 34",
+      "x": 75,
+      "y": 9398,
+      "w": 648,
+      "h": 465,
+      "image": {
+        "src": "/images/cases/tuttifree/9fe13ebf435010317a639defcabe2e9059e9cb07.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:147",
+      "name": "pão simples",
+      "x": 1347,
+      "y": 8887,
+      "w": 507,
+      "h": 687,
+      "m": [0, 1, -1, 0],
+      "image": {
+        "src": "/images/cases/tuttifree/3183afee9220522a330de65d53d284d2c6640703.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "k": "box"
+    },
+    {
+      "id": "47:149",
+      "name": "image 20",
+      "x": 1249.49,
+      "y": 11315,
+      "w": 454.49,
+      "h": 230.12,
+      "m": [-1, 0, 0, -1],
+      "image": {
+        "src": "/images/cases/tuttifree/46fb36a2e19bb2396e172a8d9e3965d1532ee656.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.55345, 0, 0.21287, 0, 0.19892, 0.18548]
+      },
+      "radius": 10,
+      "k": "box"
+    },
+    {
+      "id": "47:150",
+      "name": "image 21",
+      "x": 1249.49,
+      "y": 11080.27,
+      "w": 454.49,
+      "h": 250.83,
+      "m": [-1, 0, 0, -1],
+      "image": {
+        "src": "/images/cases/tuttifree/92b35a763e81772d6ae80537a0bfb3729598841e.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.5071, 0, 0.25166, 0, 0.19892, 0.12164]
+      },
+      "radius": 10,
+      "k": "box"
+    },
+    {
+      "id": "47:151",
+      "name": "image 22",
+      "x": 1249.49,
+      "y": 10825.99,
+      "w": 454.49,
+      "h": 271.54,
+      "m": [-1, 0, 0, -1],
+      "image": {
+        "src": "/images/cases/tuttifree/11cde082784c41dfd9dc2cdcaffdd0ca6ab16c85.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.51183, 0, 0.25166, 0, 0.21707, 0.21976]
+      },
+      "radius": 10,
+      "k": "box"
+    },
+    {
+      "id": "47:152",
+      "name": "image 23",
+      "x": 1249.49,
+      "y": 10549.84,
+      "w": 454.49,
+      "h": 254.29,
+      "m": [-1, 0, 0, -1],
+      "image": {
+        "src": "/images/cases/tuttifree/3183afee9220522a330de65d53d284d2c6640703.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.4731, 0, 0.27087, 0, 0.19521, 0.25616]
+      },
+      "radius": 10,
+      "k": "box"
+    },
+    {
+      "id": "47:153",
+      "name": "image 24",
+      "x": 1249.49,
+      "y": 10289.8,
+      "w": 454.49,
+      "h": 288.8,
+      "m": [-1, 0, 0, -1],
+      "image": {
+        "src": "/images/cases/tuttifree/e4b28a0347f2f1d6da5d777df01251f2cf015d69.png",
+        "mode": "CROP",
+        "opacity": 1,
+        "crop": [0.59207, 0, 0.10847, 0, 0.19825, 0.75403]
+      },
+      "radius": 10,
+      "k": "box"
+    },
+    {
+      "id": "47:154",
+      "name": "frente aveia e sementes",
+      "x": 77,
+      "y": 12320,
+      "w": 643,
+      "h": 771,
+      "image": {
+        "src": "/images/cases/tuttifree/c9d15f94036e933dc47264eb337a61c2b7a25c0e.png",
+        "mode": "FILL",
+        "opacity": 1
+      },
+      "radius": 20,
+      "k": "box"
+    },
+    {
+      "id": "48:164",
+      "name": "botão voltar",
+      "k": "svg",
+      "x": 64.5,
+      "y": 112.59,
+      "w": 35.5,
+      "h": 36.82,
+      "src": "/images/cases/tuttifree/svg/48-164.svg"
+    }
+  ]
+}
