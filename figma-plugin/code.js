@@ -59,6 +59,11 @@ function textStyle(seg, node) {
     textAlignHorizontal: node.textAlignHorizontal,
     textAlignVertical: node.textAlignVertical,
     textAutoResize: node.textAutoResize,
+    // Listas, recuo, espaço entre parágrafos e links não fazem parte de `characters`.
+    listType: seg.listOptions && seg.listOptions.type !== "NONE" ? seg.listOptions.type : undefined,
+    indentation: seg.indentation || undefined,
+    paragraphSpacing: seg.paragraphSpacing || undefined,
+    hyperlink: seg.hyperlink && seg.hyperlink.type === "URL" ? seg.hyperlink.value : undefined,
   };
 }
 
@@ -161,6 +166,10 @@ function serialize(node, svgs, images) {
       "textDecoration",
       "textCase",
       "fills",
+      "listOptions",
+      "indentation",
+      "paragraphSpacing",
+      "hyperlink",
     ]);
     o.style = textStyle(segs[0], node);
     o.fills = paints(segs[0].fills);
