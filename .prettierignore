@@ -1,0 +1,6 @@
+.next
+.figma
+public
+node_modules
+package-lock.json
+*.md

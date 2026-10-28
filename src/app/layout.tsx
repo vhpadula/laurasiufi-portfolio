@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     template: "%s — Laura Siufi",
   },
   // Não existe no Figma; texto aprovado pelo usuário.
-  description: "Laura Siufi — UX/UI Designer based in São Paulo. Selected works: TuttiFree, Itaú, TRAMA.",
+  description:
+    "Laura Siufi — UX/UI Designer based in São Paulo. Selected works: TuttiFree, Itaú, TRAMA.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -35,7 +35,13 @@ export function UpArrow(props: Props) {
 /** "Ellipse 2" (49:42): mancha laranja atrás do card da TuttiFree. */
 export function TuttiBlob(props: Props) {
   return (
-    <svg viewBox="0 0 1465 644" fill="none" preserveAspectRatio="none" aria-hidden {...props}>
+    <svg
+      viewBox="0 0 1465 644"
+      fill="none"
+      preserveAspectRatio="none"
+      aria-hidden
+      {...props}
+    >
       <path
         d="M1465 154.094C1465 424.161 1137.05 643.094 732.5 643.094C327.951 643.094 0 424.161 0 154.094C0 -115.973 309.951 51.0936 714.5 51.0936C1119.05 51.0936 1465 -115.973 1465 154.094Z"
         fill="#EEAD44"

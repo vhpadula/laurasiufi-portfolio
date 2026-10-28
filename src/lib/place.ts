@@ -25,7 +25,12 @@ export function place(W: number, ox = 0, oy = 0) {
  * `dy` compensa a diferença de métrica vertical entre o Figma e o Chrome (px do Figma, medido
  * por estilo contra o export: o Chrome desenha essas fontes um pouco mais alto).
  */
-export const text = (fontSize: number, lineHeightPx?: number, letterSpacingPx = 0, dy = 0): Vars => ({
+export const text = (
+  fontSize: number,
+  lineHeightPx?: number,
+  letterSpacingPx = 0,
+  dy = 0,
+): Vars => ({
   "--fs": fontSize,
   "--lh": lineHeightPx ? +(lineHeightPx / fontSize).toFixed(4) : "normal",
   "--ls": `${+(letterSpacingPx / fontSize).toFixed(4)}em`,
