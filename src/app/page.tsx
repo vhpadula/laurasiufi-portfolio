@@ -12,9 +12,9 @@ const IMG = "/images/home";
 const SIZES = (w: number) =>
   `(min-width: 1440px) ${w}px, ${Math.round((w / 1440) * 100)}vw`;
 
-const kicker = text(48, 65.088, 0, 1.25);
+const kicker = text(48, 65.088, 0, 0.75);
 const nav = text(36, 45.0703);
-const moreAbout = text(36, 34.7414, 0, 1.5);
+const moreAbout = text(36, 34.7414, 0, 1);
 const shadow = "shadow-[0_calc(4*var(--u))_calc(4*var(--u))_rgb(0_0_0/0.25)]";
 const cardTitle = "abs t font-grotesque text-title max-md:[--fs:80]!";
 const moreAboutText =
@@ -71,7 +71,7 @@ function Hero() {
       </p>
       <h1
         className="abs t font-notable whitespace-normal"
-        style={p(120, 487, 765, undefined, text(128, 123.5251, 14.08, 1))}
+        style={p(120, 487, 765, undefined, text(128, 123.5251, 14.08, 1.5))}
       >
         <span className="block">Laura </span>
         {/* Override do Figma: "Siufi" com letterSpacing 42.24px. */}

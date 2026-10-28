@@ -24,14 +24,14 @@ export function Footer({ heading, y, h, headingAt, emailAt, upAt, className = ""
     <footer className={`cv ${className}`} style={{ aspectRatio: `1440 / ${h}` }}>
       <h2
         className="abs t font-notable text-ink max-md:[--fs:76]!"
-        style={p(headingAt[0], headingAt[1], undefined, undefined, text(64, 83.2, 0, 2))}
+        style={p(headingAt[0], headingAt[1], undefined, undefined, text(64, 83.2, 0, 1))}
       >
         {heading}
       </h2>
       <a
         href={`mailto:${EMAIL}`}
         className="abs t font-content text-slate hover:text-accent max-md:[--fs:64]!"
-        style={p(emailAt[0], emailAt[1], undefined, undefined, text(36, 66.2168, 0, 2))}
+        style={p(emailAt[0], emailAt[1], undefined, undefined, text(36, 66.2168, 0, 1))}
       >
         {EMAIL}
       </a>
