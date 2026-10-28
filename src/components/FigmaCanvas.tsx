@@ -27,6 +27,10 @@ type Run = {
     case?: string;
     deco?: string;
     color?: string;
+    list?: "UNORDERED" | "ORDERED";
+    indent?: number;
+    paraSpacing?: number;
+    link?: string;
   };
 };
 type ImageFill = {
@@ -160,14 +164,23 @@ function Node({
   let el: ReactNode;
 
   if (n.k === "svg") {
-    el = (
+    const box = { ...p(n.x, n.y, n.w, n.h), ...common };
+    const img = (
       // eslint-disable-next-line @next/next/no-img-element -- SVG vetorial do Figma, sem otimização a fazer.
       <img
         src={n.src}
         alt=""
-        className="abs"
-        style={{ ...p(n.x, n.y, n.w, n.h), ...common }}
+        className={href ? "size-full" : "abs"}
+        style={href ? undefined : box}
       />
+    );
+    // Link com caixa própria (posicionada), para receber foco pelo teclado.
+    return href ? (
+      <Link href={href} aria-label="Back" className="abs" style={box}>
+        {img}
+      </Link>
+    ) : (
+      img
     );
   } else if (n.k === "line") {
     // O Figma desenha o traço de um lado da linha (y local de −peso a 0); ponta redonda soma meio peso.
@@ -243,13 +256,7 @@ function Node({
     );
   }
 
-  return href ? (
-    <Link href={href} aria-label="Back" className="contents">
-      {el}
-    </Link>
-  ) : (
-    el
-  );
+  return el;
 }
 
 function Fill({ image, w, W }: { image: ImageFill; w: number; W: number }) {
@@ -355,20 +362,22 @@ function Text({
   // Textos que quebram linha: o CSS conta o letterSpacing depois do último caractere ao decidir a
   // quebra (o Figma não), então a caixa ganha essa folga (centro/direita compensam o x). Se a altura
   // do Figma indica uma linha só, o texto não quebra — fontes diferem ~0,5% entre os renderizadores e
-  // um texto que "cabe justo" no Figma quebraria no navegador.
+  // um texto que "cabe justo" no Figma quebraria no navegador. Vale por parágrafo: se nenhum quebrou
+  // no Figma, nenhum quebra aqui.
   const autoWidth = n.resize === "WIDTH_AND_HEIGHT";
   const slack = autoWidth ? 0 : Math.max(...n.runs.map((r) => r.style.ls ?? 0));
   const shift =
     n.align === "CENTER" ? slack / 2 : n.align === "RIGHT" ? slack : 0;
+  const lines = toLines(n.runs);
+  // Se a soma das linhas (parágrafos) já dá a altura do Figma, nenhum parágrafo quebrou lá.
+  const paragraphsHeight = lines.reduce(
+    (h, l, i) =>
+      h + l.lh + (i < lines.length - 1 ? (l.style?.paraSpacing ?? 0) : 0),
+    0,
+  );
   const oneLine =
     !autoWidth &&
-    !/[\n\r\u2028]/.test(
-      n.runs
-        .map((r) => r.text)
-        .join("")
-        .trimEnd(),
-    ) &&
-    Math.round(n.h / lineHeight(first)) <= 1;
+    Math.abs(paragraphsHeight - n.h) < Math.min(...lines.map((l) => l.lh)) / 2;
   const style: CSSProperties = {
     ...p(
       n.x - shift,
@@ -395,25 +404,55 @@ function Text({
   };
   return (
     <Tag className="abs" style={style} data-node={n.id}>
-      {toLines(n.runs).map((line, i) => (
-        // O bloco usa a fonte do 1º trecho da linha: a "strut" do CSS fica igual aos glifos e a linha
-        // não cresce com o alinhamento por baseline entre fontes diferentes.
-        <span
-          key={i}
-          className="block"
-          style={{
-            ...(line.style && runStyle(line.style, W)),
-            lineHeight: px(line.lh),
-            minHeight: px(line.lh),
-          }}
-        >
-          {line.parts.map((r, j) => (
-            <span key={j} style={runStyle(r.style, W)}>
-              {r.text}
-            </span>
-          ))}
-        </span>
-      ))}
+      {lines.map((line, i, all) => {
+        const st = line.style;
+        // Listas do Figma: marcador pendurado a ~0,66em e texto recuado ~1,52em por nível (medido no
+        // Trama, 29:33958); a numeração conta os itens seguidos da mesma lista.
+        const level = st?.list ? Math.max(1, st.indent ?? 1) : 0;
+        // Número do item: quantas linhas seguidas da lista numerada terminam nesta.
+        let number = 0;
+        for (let j = i; j >= 0 && all[j].style?.list === "ORDERED"; j--)
+          number++;
+        return (
+          // O bloco usa a fonte do 1º trecho da linha: a "strut" do CSS fica igual aos glifos e a linha
+          // não cresce com o alinhamento por baseline entre fontes diferentes.
+          <span
+            key={i}
+            className={level ? "relative block" : "block"}
+            style={{
+              ...(st && runStyle(st, W)),
+              lineHeight: px(line.lh),
+              minHeight: px(line.lh),
+              paddingLeft: level ? `${1.52 * level}em` : undefined,
+              marginBottom:
+                st?.paraSpacing && i < all.length - 1
+                  ? px(st.paraSpacing)
+                  : undefined,
+            }}
+          >
+            {level > 0 && line.parts.length > 0 && (
+              <span
+                aria-hidden
+                className="absolute"
+                style={{ left: `${1.52 * (level - 1) + 0.66}em` }}
+              >
+                {st?.list === "ORDERED" ? `${number}.` : "•"}
+              </span>
+            )}
+            {line.parts.map((r, j) =>
+              r.style.link ? (
+                <a key={j} href={r.style.link} style={runStyle(r.style, W)}>
+                  {r.text}
+                </a>
+              ) : (
+                <span key={j} style={runStyle(r.style, W)}>
+                  {r.text}
+                </span>
+              ),
+            )}
+          </span>
+        );
+      })}
     </Tag>
   );
 }

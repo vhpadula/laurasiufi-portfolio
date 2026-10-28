@@ -115,6 +115,10 @@ function textStyle(s, fillsList) {
         ? s.textDecoration
         : undefined,
     color: fills(fillsList).bg,
+    list: s.listType,
+    indent: s.indentation,
+    paraSpacing: s.paragraphSpacing,
+    link: s.hyperlink,
   };
 }
 
