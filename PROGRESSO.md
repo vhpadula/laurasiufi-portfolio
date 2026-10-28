@@ -1,7 +1,20 @@
 # Progresso — portfólio Figma → Next.js
 
 ## Etapa atual
-Passo 4 — home aprovada; About implementado e medido, aguardando aprovação. Depois: cases.
+Passo 4 — home e About aprovados. **Cases (TuttiFree, Itaú, Trama) implementados e medidos** durante a
+noite, com autorização do usuário para seguir sem aprovação por página (ajustes depois). Falta:
+revisão do usuário, novo export pelo plugin (listas) e decisão de mobile dos cases. Passo 5 ainda não
+começou.
+
+### Para fazer de manhã
+1. **Reexportar os 3 cases pelo plugin atualizado** (recarregar o plugin no Figma Desktop; selecionar
+   `itaú`, `trama`, `tuttifree`; salvar `figma-export.zip` na raiz). O plugin agora exporta listas
+   (marcador/recuo), espaço entre parágrafos e links, que não estão no export atual — as listas do Trama
+   saem sem marcador e sem recuo. Depois: `importar` + `gerar-case` (eu rodo).
+2. **Mobile dos cases:** ilegível abaixo de ~768px (texto de 3–6px a 360px). O layout dos cases é
+   denso e posicionado; não dá para só aumentar o texto como na home. Precisa de layout mobile do design
+   (ou uma decisão: ex. mostrar um aviso/versão simplificada). Ver "Para perguntar ao design", item 5.
+3. Revisar as 3 páginas: http://localhost:3000/work/tuttifree, /work/itau, /work/trama.
 
 ## Ambiente
 - Node v22.22.2, npm 12.0.2 · Next 16.4.3 (Turbopack, App Router, `src/`), React 19.3, Tailwind 4
@@ -16,8 +29,12 @@ Passo 4 — home aprovada; About implementado e medido, aguardando aprovação. 
   `node scripts/figma.mjs importar <figma-export.zip>`. O zip fica na raiz e é ignorado pelo git.
 - Todos os frames da página SITE já foram exportados pelo plugin v2 (com imagens em `.figma/img/`).
 - Ferramentas:
-  - `scripts/figma.mjs listar | baixar <id> <slug> [escala] | importar <zip> | comparar <slug> <png> [--escala=1]`
+  - `scripts/figma.mjs listar | baixar <id> <slug> [escala] | importar <zip> | comparar <slug> <png> [--escala=1] [--pagina=<id>]`
   - `scripts/capturar.mjs <rota> <saida.png> [largura] [--hover=<seletor>] [--dpr=2]`
+  - `scripts/gerar-case.mjs <slug> [frame da página]` — gera `src/content/cases/<slug>.json` e copia
+    imagens/SVGs usados para `public/images/cases/<slug>/` (itau: `18:6`, trama: `29:33551`)
+  - `scripts/medir-texto.mjs`, `scripts/medir-largura.mjs`, `scripts/deslocamento.mjs` — diagnóstico de
+    posição/largura de texto contra o export
 
 ## Páginas
 | Frame | Rota | Desktop (faixas sem fotos > 0,5%) | Mobile | Status |
@@ -27,11 +44,23 @@ Passo 4 — home aprovada; About implementado e medido, aguardando aprovação. 
 | hover Itaú `53:166` | `/` | 0/119 · total 1,12% | — | medido |
 | hover Trama `53:224` | `/` | 0/119 · total 1,15% | — | medido |
 | hover About `15:171` | `/` | 0/119 · total 1,12% | — | medido |
-| pag 2 `15:224` (1440×3791) | `/about` | **0/76** com o texto original do Figma · 5/76 com as correções de digitação (só nos 4 parágrafos corrigidos) · total 2,46% | adaptado | aguardando aprovação |
+| pag 2 `15:224` (1440×3791) | `/about` | **0/76** com o texto original do Figma · 5/76 com as correções de digitação (só nos 4 parágrafos corrigidos) · total 2,46% | adaptado | **aprovada** |
 | hover Work `49:77` | `/about` | cor e posição do "Work" iguais ao Figma | — | medido |
-| itaú `18:5` | `/work/itau` | – | – | árvore ok; PNG a 0,78x (limite de 32768px de altura) |
-| trama `29:33550` | `/work/trama` | – | – | árvore ok; PNG a 0,79x (limite de 32768px de altura) |
-| tuttifree `47:22` | `/work/tuttifree` | – | – | árvore + PNG 2x ok |
+| tuttifree `47:22` (1440×15004) | `/work/tuttifree` | 21/301 · total 0,96% | ilegível < 768px | aguardando revisão |
+| itaú `18:5` (página `18:6`, 1440×42068) | `/work/itau` | 245/842 · total 2,05% (referência a 0,78x) | ilegível < 768px | aguardando revisão |
+| trama `29:33550` (página `29:33551`, 1440×41327) | `/work/trama` | 210/827 · total 1,59% (referência a 0,79x) | ilegível < 768px | aguardando revisão (listas pendentes de export) |
+
+Cases: comparados com `--pagina=<frame de 1440>` e captura a 1x (`--dpr=1`; a 2x o Chrome não captura
+páginas de 42.000px). Estruturalmente as 3 batem com o Figma de ponta a ponta (lado a lado conferido).
+O que sobra, por tipo:
+- **Itaú/Trama:** a referência veio reduzida (~0,78x, limite de 32768px de altura do export), e texto
+  pequeno comparado nessa escala acusa diferença de rasterização mesmo alinhado (conferido no olho:
+  idêntico). Esse é o piso de medição com essa referência; exportar em fatias a 2x resolveria.
+- **Trama:** listas sem marcador/recuo (falta o dado; ver "Para fazer de manhã", item 1).
+- **Itaú:** 8 setas "→" em Geologica 800 saem mais finas: a fonte não tem o glifo e o Figma usa o da
+  Noto Sans, que o Google Fonts só serve por subset dinâmico (`text=`), recusado fora do navegador.
+  Embutir a Noto Sans inteira (~580 KB) por 8 setas não compensa.
+- **TuttiFree:** linhas em Jura 32px dentro de um texto de estilos mistos ficam ~4px abaixo.
 
 Estados de interação (diff de árvore entre frames):
 - Página ativa e hover do menu em #A45E02 (`15:171` = hover About na home; `49:77` = hover Work no About).
@@ -65,18 +94,39 @@ porque Figma e Chrome reamostram com filtros diferentes (testado: desligar a oti
    - "I **Like** to explore" → "I **like** to explore" (`16:305`)
 4. **Telas maiores que 1440px:** o conteúdo fica centralizado em 1440 e as faixas de cor vão até a
    borda da janela. Ok?
+5. **Mobile dos cases:** as páginas de case são longas e densas (até 42.000px de altura no desktop). Em
+   celular o texto fica com 3–6px. Vai haver um layout mobile desses cases?
+6. **Textos alternativos das imagens dos cases:** o Figma não tem; quem escreve?
 
 ## Placeholders pendentes
 - `alt` das fotos: escritos a partir dos nomes das camadas (ex.: "pao batata doce" → "Sweet potato bread").
-- Links dos cards (`/work/tuttifree`, `/work/itau`, `/work/trama`) apontam para páginas ainda não feitas.
+- Cases: imagens com `alt=""` (o Figma não tem descrição das imagens; precisam de texto alternativo
+  real — pedir ao design/autora). Os títulos `<h1>` e o "botão voltar" (→ `/`) estão configurados em
+  `src/content/cases/index.ts`.
 - "Work" no menu aponta para `/`.
 - About: `alt` do retrato ("Portrait of Laura Siufi") escrito por mim; as duas ilustrações são
-  decorativas (`alt=""`). O nome "Laura Siufi" no topo do About leva para `/`.
+  decorativas (`alt=""`). O nome "Laura Siufi" no topo do About leva para `/` (aprovado).
 
 ## Quase-duplicatas de cor
 Cinzas escuros #141414, #2c2c2c, #2b2b35, #2d3047: **mantidos como no Figma** (decisão do usuário).
 
 ## Decisões
+- **Cases gerados a partir do Figma**, não escritos à mão (centenas de elementos cada):
+  `scripts/gerar-case.mjs` converte a árvore exportada em dados e `src/components/FigmaCanvas.tsx`
+  desenha no mesmo canvas da home. Mudou o Figma → exportar, `importar`, `gerar-case`.
+- Figma: filhos de grupo são posicionados relativos ao frame (conferido em 735 nós) — grupos não viram
+  elemento; frames sim (com `overflow: hidden` quando cortam).
+- Texto dos cases: um bloco por linha com a entrelinha do Figma (a maior entre os caracteres da linha) e
+  a fonte do próprio trecho (sem "strut" do container). Quebras: `\n`, `\r\n`, `\r` e U+2028. Entrelinha
+  "auto" por família (Chivo 1,446 medido no Figma; demais = "normal" do navegador, que bate com o Figma).
+- Textos que quebram linha ganham na largura só a folga do letterSpacing final (o CSS conta, o Figma
+  não); se a soma dos parágrafos já dá a altura do Figma, nada quebra. Uma folga de 1% foi testada e
+  piorou (palavras extras subiam de linha).
+- Testado e **revertido**: compensar a largura das fontes com letterSpacing por família (a razão de
+  largura ia a ~1,000, mas a diferença de pixels piorou: Itaú 2,04 → 2,52%).
+- Sombra de forma sem preenchimento opaco → `filter: drop-shadow` (segue o alfa, como o Figma).
+- Exports altos: escala vertical ≠ horizontal; `comparar` usa as duas (Itaú 9,17% → 2,04%).
+- Fontes dos cases carregadas só em `/work/*` (`src/app/work/fonts.ts`); Georama com eixo `wdth`.
 - Erros de digitação do Figma no About são corrigidos no código (lista completa em "Para perguntar
   ao design", item 3). O texto pode mudar depois; os blocos
   corrigidos terão diferença de largura esperada no `comparar`.
