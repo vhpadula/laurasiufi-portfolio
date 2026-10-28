@@ -14,7 +14,11 @@ import {
 const chivo = Chivo({ subsets: ["latin"], variable: "--nf-chivo" });
 const cinzel = Cinzel({ subsets: ["latin"], variable: "--nf-cinzel" });
 const geologica = Geologica({ subsets: ["latin"], variable: "--nf-geologica" });
-const georama = Georama({ subsets: ["latin"], variable: "--nf-georama" });
+const georama = Georama({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--nf-georama",
+});
 const gruppo = Gruppo({
   weight: "400",
   subsets: ["latin"],

@@ -5035,6 +5035,7 @@
               "color": "rgb(0 0 0 / 0.5)"
             }
           ],
+          "translucent": true,
           "k": "box"
         },
         {
@@ -5275,6 +5276,7 @@
               "color": "rgb(0 0 0 / 0.5)"
             }
           ],
+          "translucent": true,
           "k": "box"
         },
         {
@@ -5701,6 +5703,7 @@
               "color": "rgb(0 0 0 / 0.5)"
             }
           ],
+          "translucent": true,
           "k": "box"
         },
         {
@@ -8634,6 +8637,7 @@
                   "color": "rgb(0 0 0 / 0.5)"
                 }
               ],
+              "translucent": true,
               "k": "box"
             },
             {
@@ -8655,6 +8659,7 @@
                   "color": "rgb(0 0 0 / 0.5)"
                 }
               ],
+              "translucent": true,
               "k": "box"
             },
             {
@@ -8676,6 +8681,7 @@
                   "color": "rgb(0 0 0 / 0.5)"
                 }
               ],
+              "translucent": true,
               "k": "box"
             },
             {

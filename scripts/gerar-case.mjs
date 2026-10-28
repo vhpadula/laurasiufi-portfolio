@@ -219,7 +219,19 @@ function convert(n, frameAbs) {
   else if (n.rectangleCornerRadii) node.radius = n.rectangleCornerRadii;
   else if (n.cornerRadius) node.radius = n.cornerRadius;
   const shadow = effects(n.effects);
-  if (shadow) node.shadow = shadow;
+  if (shadow) {
+    node.shadow = shadow;
+    // A sombra do Figma segue o alfa da forma: sem preenchimento opaco, só o contorno faz sombra.
+    const alpha = Math.max(
+      0,
+      ...(n.fills ?? [])
+        .filter((p) => p.visible !== false)
+        .map((p) =>
+          p.type === "IMAGE" ? 1 : (p.opacity ?? 1) * (p.color?.a ?? 1),
+        ),
+    );
+    if (alpha < 0.99) node.translucent = true;
+  }
 
   if (isFrame(n)) {
     node.k = "frame";

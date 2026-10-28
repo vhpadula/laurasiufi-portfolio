@@ -54,6 +54,7 @@ export type CaseNode =
       border?: { w: number; color: string; align: string };
       radius?: number | number[] | string;
       shadow?: Shadow[];
+      translucent?: boolean;
       clip?: boolean;
       children?: CaseNode[];
     })
@@ -193,9 +194,21 @@ function Node({
       ...common,
       background: n.bg,
       borderRadius: n.radius != null ? radius(n.radius) : undefined,
-      boxShadow: n.shadow?.some((s) => !s.inset)
-        ? shadows(n.shadow.filter((s) => !s.inset))
-        : undefined,
+      // Forma translúcida: drop-shadow segue o alfa do que é desenhado (como o Figma); box-shadow não.
+      boxShadow:
+        !n.translucent && n.shadow?.some((s) => !s.inset)
+          ? shadows(n.shadow.filter((s) => !s.inset))
+          : undefined,
+      filter:
+        n.translucent && n.shadow?.some((s) => !s.inset)
+          ? n.shadow
+              .filter((s) => !s.inset)
+              .map(
+                (s) =>
+                  `drop-shadow(${u(s.x)} ${u(s.y)} ${u(s.blur)} ${s.color})`,
+              )
+              .join(" ")
+          : undefined,
     };
     if (n.border) {
       // Contorno como outline: INSIDE/CENTER/OUTSIDE viram o deslocamento, sem mudar o tamanho da caixa.
@@ -301,7 +314,8 @@ function toLines(runs: Run[]) {
   };
   for (const r of runs) {
     r.text
-      .replace(/\r/g, "")
+      // Quebras do Figma: "\n", "\r\n", "\r" sozinho e o separador de linha U+2028.
+      .replace(/\r\n?|\u2028/g, "\n")
       .split("\n")
       .forEach((part, i) => {
         if (i > 0) {
@@ -338,11 +352,28 @@ function Text({
         : "p";
   const dy = FONT_DY[first.family] ?? 0;
   const px = (v: number) => `calc(${+v.toFixed(3)} * 100cqw / ${W})`;
+  // Textos que quebram linha: o CSS conta o letterSpacing depois do último caractere ao decidir a
+  // quebra (o Figma não), então a caixa ganha essa folga (centro/direita compensam o x). Se a altura
+  // do Figma indica uma linha só, o texto não quebra — fontes diferem ~0,5% entre os renderizadores e
+  // um texto que "cabe justo" no Figma quebraria no navegador.
+  const autoWidth = n.resize === "WIDTH_AND_HEIGHT";
+  const slack = autoWidth ? 0 : Math.max(...n.runs.map((r) => r.style.ls ?? 0));
+  const shift =
+    n.align === "CENTER" ? slack / 2 : n.align === "RIGHT" ? slack : 0;
+  const oneLine =
+    !autoWidth &&
+    !/[\n\r\u2028]/.test(
+      n.runs
+        .map((r) => r.text)
+        .join("")
+        .trimEnd(),
+    ) &&
+    Math.round(n.h / lineHeight(first)) <= 1;
   const style: CSSProperties = {
     ...p(
-      n.x,
+      n.x - shift,
       n.y,
-      n.resize === "WIDTH_AND_HEIGHT" ? undefined : n.w,
+      autoWidth ? undefined : n.w + slack,
       fixed ? n.h : undefined,
     ),
     ...common,
@@ -350,7 +381,7 @@ function Text({
       n.align === "JUSTIFIED"
         ? "justify"
         : (n.align.toLowerCase() as CSSProperties["textAlign"]),
-    whiteSpace: n.resize === "WIDTH_AND_HEIGHT" ? "pre" : "pre-wrap",
+    whiteSpace: autoWidth || oneLine ? "pre" : "pre-wrap",
     textShadow: n.shadow ? textShadows(n.shadow) : undefined,
     translate: dy ? `0 ${u(dy)}` : undefined,
     display: "flex",
@@ -363,7 +394,7 @@ function Text({
           : undefined,
   };
   return (
-    <Tag className="abs" style={style}>
+    <Tag className="abs" style={style} data-node={n.id}>
       {toLines(n.runs).map((line, i) => (
         // O bloco usa a fonte do 1º trecho da linha: a "strut" do CSS fica igual aos glifos e a linha
         // não cresce com o alinhamento por baseline entre fontes diferentes.
