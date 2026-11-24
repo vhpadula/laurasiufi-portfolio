@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+html {
+  background: #ffffff;
+  color: #000000;
+  /* Avanços fracionários como no Figma: sem isso o Chrome arredonda e os textos crescem até 5px. */
+  text-rendering: geometricPrecision;
+}
+
+/* Em @layer components para que utilitários do Tailwind possam sobrescrever. */
+@layer components {
+  /*
+   * Canvas: os filhos são posicionados em px do Figma (--x, --y, --w, --h), relativos a um
+   * quadro de largura --W, e escalam com a largura do canvas (1 px do Figma = 100cqw / --W).
+   * Desktop e mobile são frames diferentes do Figma (ver FigmaPage/Responsive).
+   */
+  .cv {
+    position: relative;
+    container-type: inline-size;
+  }
+
+  .abs {
+    --u: calc(100cqw / var(--W));
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+    width: calc(var(--w) * var(--u));
+    height: calc(var(--h) * var(--u));
+  }
+
+  /* Faixas que no Figma vão até a borda do frame continuam até a borda da janela (>1440px). */
+  .bleed-x {
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 -100vmax);
+  }
+
+  .bleed-r {
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 -100vmax 0 0);
+  }
+
+  .bleed-l {
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 0 0 -100vmax);
+  }
+}
+
+/* Hovers animados (FigmaPage): caixa, posição e opacidade transitam entre a base e o frame de hover. */
+.morph [data-n],
+.morph [data-t] {
+  transition-property: left, top, width, height, margin-top, opacity;
+  transition-duration: 550ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morph [data-n],
+  .morph [data-t] {
+    transition: none;
+  }
+}
