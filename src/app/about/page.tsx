@@ -10,9 +10,15 @@ export default function About() {
   const { desktop, mobile } = aboutPage;
   return (
     <Responsive
-      desktop={<FigmaPage id="about" config={desktop} />}
+      desktop={<FigmaPage id="about" config={desktop} layout="desktop" first />}
       mobile={mobile.map((c, i) => (
-        <FigmaPage key={i} id={`m-about-${i}`} config={c} />
+        <FigmaPage
+          key={i}
+          id={`m-about-${i}`}
+          config={c}
+          layout="mobile"
+          first={i === 0}
+        />
       ))}
     />
   );

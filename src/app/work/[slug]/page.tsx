@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FigmaPage, Responsive } from "@/components/FigmaPage";
 import { cases, isCaseSlug } from "@/content/pages";
+import { caseFontVariables } from "../fonts";
 
 export function generateStaticParams() {
   return Object.keys(cases).map((slug) => ({ slug }));
@@ -20,9 +21,12 @@ export default async function CasePage({ params }: PageProps<"/work/[slug]">) {
   const { desktop, mobile } = cases[slug];
   return (
     <Responsive
+      className={caseFontVariables}
       bg={desktop.data.bg}
-      desktop={<FigmaPage id={slug} config={desktop} />}
-      mobile={<FigmaPage id={`m-${slug}`} config={mobile} />}
+      desktop={<FigmaPage id={slug} config={desktop} layout="desktop" first />}
+      mobile={
+        <FigmaPage id={`m-${slug}`} config={mobile} layout="mobile" first />
+      }
     />
   );
 }

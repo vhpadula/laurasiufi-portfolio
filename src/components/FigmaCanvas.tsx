@@ -95,7 +95,36 @@ export type PageData = {
 export type CanvasOptions = {
   /** Nó de texto que vira o <h1> da página. */
   titleId?: string;
+  /** Frame desktop (≥ 768px) ou mobile: o outro fica escondido e não precisa de imagem grande. */
+  layout?: "desktop" | "mobile";
+  /**
+   * Primeira tela (px do Figma a partir do topo): a maior imagem dela — o LCP — carrega já, com
+   * prioridade. Só ela: várias imagens com prioridade alta disputam a banda no celular.
+   */
+  eagerTop?: number;
+  /** Calculado pelo FigmaCanvas a partir de `eagerTop`. */
+  eagerId?: string;
 };
+
+/** Maior imagem (área visível no frame) que começa acima de `top`. */
+function largestImage(data: PageData, top: number) {
+  let best: { id?: string; area: number } = { area: 0 };
+  (function walk(list: PageNode[], oy: number) {
+    for (const n of list) {
+      if (n.k === "group") walk(n.children, oy);
+      else if (n.k === "box" || n.k === "frame") {
+        const y = oy + n.y;
+        const visible =
+          Math.max(0, Math.min(y + n.h, top) - Math.max(y, 0)) *
+          Math.max(0, Math.min(n.x + n.w, data.width) - Math.max(n.x, 0));
+        if (n.image && y < top && visible > best.area)
+          best = { id: n.id, area: visible };
+        if (n.k === "frame" && n.children) walk(n.children, y);
+      }
+    }
+  })(data.nodes, data.offset.y);
+  return best.id;
+}
 
 const FONT: Record<string, string> = {
   "Bruno Ace SC": "var(--nf-bruno)",
@@ -149,10 +178,19 @@ const radius = (r: number | number[] | string) =>
   typeof r === "string" ? r : Array.isArray(r) ? r.map(u).join(" ") : u(r);
 const matrix = (m?: number[]) =>
   m ? `matrix(${m[0]}, ${m[1]}, ${m[2]}, ${m[3]}, 0, 0)` : undefined;
-const sizes = (w: number, W: number) =>
-  `(min-width: 1440px) ${Math.round(w)}px, ${Math.max(1, Math.round((w / W) * 100))}vw`;
+// `sizes` do next/image. Na largura em que o layout fica escondido (display: none), 1px: se uma
+// imagem dele carregar (as da primeira tela não são lazy), baixa a menor versão.
+const sizes = (w: number, W: number, layout?: CanvasOptions["layout"]) => {
+  const vw = `${Math.max(1, Math.round((w / W) * 100))}vw`;
+  return layout === "mobile"
+    ? `(min-width: 768px) 1px, ${vw}`
+    : `${layout === "desktop" ? "(max-width: 767px) 1px, " : ""}(min-width: 1440px) ${Math.round(w)}px, ${vw}`;
+};
 
-/** Faixa de cor que encosta na borda da página continua até a borda da janela (telas > 1440). */
+/**
+ * Origem deste container na página (para as faixas que encostam na borda, que continuam até a
+ * borda da janela em telas > 1440) e largura da página.
+ */
 type Edge = { ox: number; PW: number };
 
 function Node({
@@ -201,6 +239,8 @@ function Node({
         data-n={n.id}
         src={n.src}
         alt=""
+        // Lazy: no layout escondido (desktop/mobile) o SVG nem é baixado.
+        loading="lazy"
         className="abs"
         style={{ ...p(n.x, n.y, n.w, n.h), ...common }}
       />
@@ -275,7 +315,15 @@ function Node({
         className={`abs ${isFrame ? "cv" : ""} ${n.clip || n.image ? "overflow-hidden" : ""} ${bleed}`}
         style={style}
       >
-        {n.image && <Fill image={n.image} w={n.w} W={W} />}
+        {n.image && (
+          <Fill
+            image={n.image}
+            w={n.w}
+            W={W}
+            layout={opts.layout}
+            eager={n.id != null && n.id === opts.eagerId}
+          />
+        )}
         {isFrame &&
           n.children?.map((c, i) => (
             <Node
@@ -300,7 +348,19 @@ function Node({
   return el;
 }
 
-function Fill({ image, w, W }: { image: ImageFill; w: number; W: number }) {
+function Fill({
+  image,
+  w,
+  W,
+  layout,
+  eager,
+}: {
+  image: ImageFill;
+  w: number;
+  W: number;
+  layout: CanvasOptions["layout"];
+  eager: boolean;
+}) {
   if (image.mode === "CROP" && image.crop) {
     const [sx, , tx, , sy, ty] = image.crop;
     return (
@@ -308,7 +368,8 @@ function Fill({ image, w, W }: { image: ImageFill; w: number; W: number }) {
         <CroppedImage
           src={image.src}
           alt=""
-          sizes={sizes(w / Math.min(sx, 1), W)}
+          sizes={sizes(w / Math.min(sx, 1), W, layout)}
+          preload={eager}
           transform={[
             [sx, 0, tx],
             [0, sy, ty],
@@ -322,7 +383,8 @@ function Fill({ image, w, W }: { image: ImageFill; w: number; W: number }) {
       src={image.src}
       alt=""
       fill
-      sizes={sizes(w, W)}
+      sizes={sizes(w, W, layout)}
+      {...(eager ? { loading: "eager", fetchPriority: "high" } : {})}
       className={image.mode === "FIT" ? "object-contain" : "object-cover"}
       style={{ opacity: image.opacity }}
     />
@@ -545,6 +607,8 @@ export function FigmaCanvas({
   opts?: CanvasOptions;
 }) {
   const p = place(data.width);
+  if (opts.eagerTop)
+    opts = { ...opts, eagerId: largestImage(data, opts.eagerTop) };
   return (
     <div
       className="cv"

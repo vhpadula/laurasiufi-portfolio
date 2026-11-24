@@ -7,10 +7,10 @@ export default function Home() {
   const { desktop, mobile } = homePage;
   return (
     <Responsive
-      desktop={<FigmaPage id="home" config={desktop} />}
+      desktop={<FigmaPage id="home" config={desktop} layout="desktop" first />}
       mobile={
         <>
-          <FigmaPage id="m-home" config={mobile.hero} />
+          <FigmaPage id="m-home" config={mobile.hero} layout="mobile" first />
           <div className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none]">
             {mobile.slides.map((s) => (
               <section
@@ -18,7 +18,7 @@ export default function Home() {
                 id={s.id}
                 className="w-full shrink-0 snap-start overflow-clip"
               >
-                <FigmaPage id={`m-${s.id}`} config={s} />
+                <FigmaPage id={`m-${s.id}`} config={s} layout="mobile" />
               </section>
             ))}
           </div>

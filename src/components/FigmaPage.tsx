@@ -72,10 +72,15 @@ function topLevel(nodes: PageNode[]): PageNode[] {
 export function FigmaPage({
   id,
   config,
+  layout,
+  first = false,
 }: {
   /** Identificador único na página (escopo do CSS dos hovers). */
   id: string;
   config: PageConfig;
+  layout: "desktop" | "mobile";
+  /** Primeira tela da página: as imagens dela carregam já, com prioridade (LCP). */
+  first?: boolean;
 }) {
   const { titleId, title, links = [], variants = [] } = config;
   const W = config.data.width;
@@ -146,7 +151,15 @@ export function FigmaPage({
   return (
     <div data-fp={id} className={`cv ${variants.length ? "morph" : ""}`}>
       {!titleId && title && <h1 className="sr-only">{title}</h1>}
-      <FigmaCanvas data={data} opts={{ titleId }} />
+      <FigmaCanvas
+        data={data}
+        opts={{
+          titleId,
+          layout,
+          // Uma tela: 1440×900 no desktop, o frame do iPhone (874) no mobile.
+          eagerTop: first ? (layout === "desktop" ? 900 : 874) : 0,
+        }}
+      />
       {links.map((l, i) => {
         const [x, y, w, h] = union(data, l.ids, l.pad);
         const props = {
@@ -172,14 +185,16 @@ export function Responsive({
   desktop,
   mobile,
   bg,
+  className = "",
 }: {
   desktop: React.ReactNode;
   mobile: React.ReactNode;
+  className?: string;
   /** Fundo da página, que continua além dos 1440px. */
   bg?: string;
 }) {
   return (
-    <div className="overflow-x-clip" style={{ background: bg }}>
+    <div className={`overflow-x-clip ${className}`} style={{ background: bg }}>
       <main className="relative mx-auto max-w-[1440px] max-md:hidden">
         {desktop}
       </main>
