@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FigmaCanvas } from "@/components/FigmaCanvas";
-import { cases, isCaseSlug } from "@/content/cases";
-import { caseFontVariables } from "../fonts";
+import { FigmaPage, Responsive } from "@/components/FigmaPage";
+import { cases, isCaseSlug } from "@/content/pages";
 
 export function generateStaticParams() {
   return Object.keys(cases).map((slug) => ({ slug }));
@@ -18,12 +17,12 @@ export async function generateMetadata({
 export default async function CasePage({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
   if (!isCaseSlug(slug)) notFound();
-  const { data, opts } = cases[slug];
+  const { desktop, mobile } = cases[slug];
   return (
-    <div className={`overflow-x-clip ${caseFontVariables}`}>
-      <main className="relative mx-auto max-w-[1440px]">
-        <FigmaCanvas data={data} opts={opts} />
-      </main>
-    </div>
+    <Responsive
+      bg={desktop.data.bg}
+      desktop={<FigmaPage id={slug} config={desktop} />}
+      mobile={<FigmaPage id={`m-${slug}`} config={mobile} />}
+    />
   );
 }
