@@ -41,12 +41,18 @@ await page.evaluate(async () => {
 });
 await page.waitForLoadState("networkidle");
 await page.evaluate(() =>
-  Promise.all(
-    // Só imagens na tela: as do layout escondido (desktop/mobile) são lazy e nunca carregam.
-    [...document.images].map((i) =>
-      i.complete || !i.getClientRects().length ? null : new Promise((r) => (i.onload = i.onerror = r)),
+  Promise.race([
+    Promise.all(
+      // Só imagens na tela: as do layout escondido (desktop/mobile) são lazy e nunca carregam.
+      [...document.images].map((i) =>
+        i.complete || !i.getClientRects().length
+          ? null
+          : new Promise((r) => (i.onload = i.onerror = r)),
+      ),
     ),
-  ),
+    // Slides fora da tela no carrossel do mobile também ficam sem carregar.
+    new Promise((r) => setTimeout(r, 15000)),
+  ]),
 );
 // Viewport da altura da página: assim o hover não se perde quando o screenshot de página inteira
 // rola de volta ao topo (o mouse fica numa coordenada da janela, não do documento).
