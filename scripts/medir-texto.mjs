@@ -5,7 +5,7 @@ import { PNG } from "pngjs";
 import { readFileSync } from "node:fs";
 
 const [slug, capPath] = process.argv.slice(2);
-const data = JSON.parse(readFileSync(`src/content/cases/${slug}.json`, "utf8"));
+const data = JSON.parse(readFileSync(`src/content/pages/${slug}.json`, "utf8"));
 const node = JSON.parse(readFileSync(`.figma/${slug}.json`, "utf8"));
 const f = PNG.sync.read(readFileSync(`.figma/${slug}.png`));
 const c = PNG.sync.read(readFileSync(capPath));

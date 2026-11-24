@@ -25,7 +25,13 @@ await page.addStyleTag({
     "*,*::before,*::after{transition:none!important;animation:none!important;caret-color:transparent!important}nextjs-portal{display:none!important}",
 });
 await page.evaluate(() => document.fonts.ready);
-// Força o carregamento de imagens lazy rolando até o fim.
+// Força o carregamento de imagens lazy rolando até o fim. As que ficam fora da área visível de uma
+// variação de hover (clip-path) nunca entrariam na tela: essas carregam já.
+await page.evaluate(() =>
+  document
+    .querySelectorAll("[data-v] img[loading=lazy]")
+    .forEach((i) => i.getClientRects().length && (i.loading = "eager")),
+);
 await page.evaluate(async () => {
   for (let y = 0; y < document.body.scrollHeight; y += 600) {
     window.scrollTo(0, y);
@@ -36,8 +42,9 @@ await page.evaluate(async () => {
 await page.waitForLoadState("networkidle");
 await page.evaluate(() =>
   Promise.all(
+    // Só imagens na tela: as do layout escondido (desktop/mobile) são lazy e nunca carregam.
     [...document.images].map((i) =>
-      i.complete ? null : new Promise((r) => (i.onload = i.onerror = r)),
+      i.complete || !i.getClientRects().length ? null : new Promise((r) => (i.onload = i.onerror = r)),
     ),
   ),
 );

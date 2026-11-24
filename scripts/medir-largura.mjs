@@ -10,7 +10,7 @@ const browser = await chromium.launch();
 const acc = {};
 for (const slug of process.argv.slice(2)) {
   const data = JSON.parse(
-    readFileSync(`src/content/cases/${slug}.json`, "utf8"),
+    readFileSync(`src/content/pages/${slug}.json`, "utf8"),
   );
   const want = {};
   (function walk(list) {

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Gera os dados de uma página de case a partir da árvore exportada do Figma. Uso:
-//   node scripts/gerar-case.mjs <slug> [node-id da página]
-// Lê .figma/<slug>.json (+ .figma/img, .figma/svg) e escreve src/content/cases/<slug>.json,
-// copiando para public/images/cases/<slug>/ só as imagens e SVGs usados. A página visível é o
-// frame <node-id> (padrão: a raiz); o resto da árvore é posicionado relativo a ele.
+// Gera os dados de uma página a partir de um frame exportado pelo plugin (figma-plugin/). Uso:
+//   node scripts/gerar-pagina.mjs <slug> <frame.json> [node-id da página] [--sem=<id>,<id>…]
+// Lê o JSON (com img/ e svg/ ao lado) e escreve src/content/pages/<slug>.json, copiando para
+// public/images/figma/ só as imagens e SVGs usados. A página visível é o frame <node-id> (padrão: a
+// raiz); o resto da árvore é posicionado relativo a ele. `--sem` omite nós (ex.: o header repetido
+// nas telas do mobile).
 import {
   copyFileSync,
   existsSync,
@@ -16,19 +17,31 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const FIG = resolve(ROOT, ".figma");
-const [slug, pageId] = process.argv.slice(2);
-if (!slug) {
-  console.error("uso: gerar-case.mjs <slug> [node-id da página]");
+const args = process.argv.slice(2);
+const skip = new Set(
+  (args.find((a) => a.startsWith("--sem="))?.slice(6) ?? "")
+    .split(",")
+    .filter(Boolean),
+);
+const [slug, src, pageId] = args.filter((a) => !a.startsWith("--"));
+if (!slug || !src) {
+  console.error(
+    "uso: gerar-pagina.mjs <slug> <frame.json> [node-id da página] [--sem=<id>,…]",
+  );
   process.exit(1);
 }
 
-const tree = JSON.parse(readFileSync(resolve(FIG, `${slug}.json`), "utf8"));
-const outImg = resolve(ROOT, "public/images/cases", slug);
+const FIG = dirname(resolve(src));
+const tree = JSON.parse(readFileSync(resolve(src), "utf8"));
+// Pasta única para todas as páginas: imagens têm nome pelo hash e SVGs pelo node-id, então
+// variações (hover, mobile) reaproveitam o mesmo arquivo e o cache do navegador.
+const outImg = resolve(ROOT, "public/images/figma");
 mkdirSync(outImg, { recursive: true });
-const publicPath = `/images/cases/${slug}`;
+const publicPath = "/images/figma";
 const imgFiles = Object.fromEntries(
-  readdirSync(resolve(FIG, "img")).map((f) => [f.split(".")[0], f]),
+  (existsSync(resolve(FIG, "img")) ? readdirSync(resolve(FIG, "img")) : []).map(
+    (f) => [f.split(".")[0], f],
+  ),
 );
 
 const r2 = (n) => Math.round(n * 100) / 100;
@@ -45,6 +58,7 @@ function color(c, opacity = 1) {
 }
 
 const used = { img: new Set(), svg: new Set() };
+const boxes = {};
 
 /** Preenchimentos: cores/gradientes viram um `background` CSS; imagens viram `{ src, mode, crop }`. */
 function fills(list) {
@@ -127,7 +141,12 @@ function textStyle(s, fillsList) {
  * relativo ao frame, mesmo para filhos de grupos — conferido nos 3 cases). Grupos não viram elemento.
  */
 function convert(n, frameAbs) {
-  if (n.visible === false) return [];
+  if (n.visible === false || skip.has(n.id)) return [];
+  // Caixa de cada grupo/nó nomeado em coordenadas da página, para links e áreas de hover.
+  if (n.absoluteBoundingBox) {
+    const b = n.absoluteBoundingBox;
+    boxes[n.id] = [b.x - P.x, b.y - P.y, b.width, b.height].map(r2);
+  }
   if (n.type !== "GROUP" && !n.relativeTransform) return [];
 
   if (n.type === "GROUP") {
@@ -278,6 +297,7 @@ const data = {
   offset: { x: r2(R.x - P.x), y: r2(R.y - P.y) },
   bg: fills(tree.fills).bg ?? fills(page.fills).bg,
   nodes: rootChildren,
+  boxes,
 };
 
 mkdirSync(resolve(outImg, "svg"), { recursive: true });
@@ -285,9 +305,9 @@ for (const f of used.img)
   copyFileSync(resolve(FIG, "img", f), resolve(outImg, f));
 for (const f of used.svg)
   copyFileSync(resolve(FIG, "svg", f), resolve(outImg, "svg", f));
-mkdirSync(resolve(ROOT, "src/content/cases"), { recursive: true });
+mkdirSync(resolve(ROOT, "src/content/pages"), { recursive: true });
 writeFileSync(
-  resolve(ROOT, "src/content/cases", `${slug}.json`),
+  resolve(ROOT, "src/content/pages", `${slug}.json`),
   JSON.stringify(data),
 );
 
@@ -299,5 +319,5 @@ let count = 0;
   }
 })(data.nodes);
 console.log(
-  `src/content/cases/${slug}.json — ${count} nós · ${used.img.size} imagens · ${used.svg.size} SVGs · página ${data.width}×${data.height}`,
+  `src/content/pages/${slug}.json — ${count} nós · ${used.img.size} imagens · ${used.svg.size} SVGs · página ${data.width}×${data.height}`,
 );
