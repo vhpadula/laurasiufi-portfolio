@@ -1,13 +1,15 @@
 # Progresso — portfólio Figma → Next.js
 
 ## Etapa atual
-**v2 do Figma (redesign com desktop e mobile) implementada** em 2026-11-23: home, About e os três
-cases, cada um com o frame desktop (≥ 768px) e o frame mobile (< 768px). Aguardando revisão do
-usuário. Passo 5 (favicon, OG, 404, Lighthouse) ainda não começou.
+**v2 do Figma implementada e aprovada pelo usuário** (desktop e mobile), com hover animado.
+**Passo 5 feito** em 2026-11-24: favicon, imagem Open Graph, 404 e Lighthouse ≥ 90 em todas as páginas.
+Next.js atualizado para 16.4.6 (correção de segurança). Falta: respostas da Laura, push e deploy
+(perguntar antes).
 
 ### Pendências
 1. **Mandar para a Laura** a mensagem de "Para mandar para a Laura" (abaixo) e anotar as respostas.
-2. Passo 5: favicon, imagem Open Graph, 404 e Lighthouse (em andamento).
+2. **Push e deploy:** perguntar antes. No deploy, definir o domínio em `metadataBase` (hoje a URL da
+   imagem de compartilhamento sai com `localhost` fora da Vercel).
 
 ### Para mandar para a Laura
 Mensagem pronta (WhatsApp):
@@ -32,6 +34,33 @@ Mensagem pronta (WhatsApp):
 >    de compartilhamento. Se quiser desenhar os dois, eu troco.
 > 6. **Página 404** (link quebrado) — também não está no Figma; fiz uma simples no estilo do site.
 >    Quer desenhar uma?
+> 7. **Contraste** — no case TuttiFree, alguns textos pequenos (Chivo, Jura e Holtwood sobre o
+>    creme/laranja) ficam abaixo do contraste mínimo recomendado para leitura (WCAG AA). Quer
+>    escurecer essas cores, ou mantemos?
+
+## Passo 5
+- **Favicon/ícones** (`src/app/favicon.ico`, `icon.png`, `apple-icon.png`): "LS" com as letras do nome
+  da home (Notable, recortadas do export do Figma). Não existe no Figma — pendente da Laura.
+- **Open Graph** (`src/app/opengraph-image.png` + `.alt.txt`): topo da home recortado do export do
+  Figma, 1200×630. Pendente da Laura.
+- **404** (`src/app/not-found.tsx`): simples, com Notable/Contrail One/Darker Grotesque e as cores do site.
+- **Lighthouse 13.6** (build de produção, `next start`, cache de imagens aquecido):
+
+| Página | Mobile (perf · a11y · boas práticas · SEO) | Desktop |
+| --- | --- | --- |
+| `/` | 91 · 100 · 100 · 100 | 100 · 100 · 100 · 100 |
+| `/about` | 98 · 100 · 100 · 100 | 100 · 100 · 100 · 100 |
+| `/work/tuttifree` | 99 · 95 · 100 · 100 | 100 · 95 · 96 · 100 |
+| `/work/itau` | 98 · 100 · 96 · 100 | 100 · 95 · 100 · 100 |
+| `/work/trama` | 98 · 100 · 100 · 100 | 100 · 95 · 100 · 100 |
+
+  Abaixo de 100: contraste de cores do próprio design (pergunta 7 para a Laura) e imagens que o
+  Figma estica no recorte (CROP com escala diferente em x e y — fiel ao Figma).
+  O que levou o mobile de 77–86 para 91–99: fontes dos cases só em `/work` e sem preload, AVIF,
+  prioridade só para a maior imagem da primeira tela, layout escondido sem baixar imagens grandes.
+- Para rodar o Lighthouse no WSL: abrir o Chromium do Playwright com `--remote-debugging-port` e
+  passar `--port` ao Lighthouse (sozinho ele cria pastas `C:\Users\...` na pasta atual, que o
+  Tailwind tenta ler e quebram o build — se aparecerem na raiz, apagar).
 
 ## Ambiente
 - Next.js 16.4.3 (App Router, Turbopack, Cache Components), React 19, Tailwind 4, TypeScript.
