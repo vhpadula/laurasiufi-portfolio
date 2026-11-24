@@ -6,15 +6,32 @@ cases, cada um com o frame desktop (≥ 768px) e o frame mobile (< 768px). Aguar
 usuário. Passo 5 (favicon, OG, 404, Lighthouse) ainda não começou.
 
 ### Pendências
-1. **Revisar as páginas** (desktop e mobile): http://localhost:3000/, /about, /work/tuttifree,
-   /work/itau, /work/trama. No navegador, o mobile aparece abaixo de 768px de largura.
-2. **Decisões de comportamento que o Figma não mostra** (ver "Decisões da v2"): carrossel do mobile,
-   telas do About mobile em sequência, header só na primeira tela.
-3. **Textos alternativos das imagens:** o Figma não tem; hoje todas as imagens têm `alt=""` (os links
-   têm `aria-label`). Perguntar ao design quem escreve.
-4. **Next.js com vulnerabilidade conhecida:** o `next dev`/`next build` avisa e recomenda
-   `next upgrade --agent=security`. Perguntar ao usuário antes de atualizar.
-5. Passo 5 depois da revisão.
+1. **Mandar para a Laura** a mensagem de "Para mandar para a Laura" (abaixo) e anotar as respostas.
+2. Passo 5: favicon, imagem Open Graph, 404 e Lighthouse (em andamento).
+
+### Para mandar para a Laura
+Mensagem pronta (WhatsApp):
+
+> Oi, Laura! O portfólio novo (desktop e mobile) já está implementado. Ficaram algumas dúvidas:
+>
+> 1. **Textos alternativos das imagens** — para acessibilidade (leitores de tela e Google), cada imagem
+>    precisa de uma descrição curta. O Figma não tem. Você me manda, ou posso escrever a partir dos
+>    nomes das camadas e você revisa?
+> 2. **Hover dos cards da home** — os frames de hover estão em alturas um pouco diferentes entre si (no
+>    do Itaú o card subiu 39px, no da Trama a página inteira desceu 45px, no do TuttiFree a seção da
+>    Trama desceu menos que a do Itaú). Fiz a animação mantendo o card no lugar e empurrando o resto
+>    para baixo por igual. Dá uma olhada se ficou como você imaginou.
+> 3. **Mobile** — como não tem hover no celular: na home, os três cases viraram um carrossel (arrasta
+>    para o lado ou toca em "next"); no About, as quatro telas ficam uma embaixo da outra, com o menu só
+>    na primeira. É isso?
+> 4. **Setas do Itaú** — no título "Dados → Insights → Narrativa → Reflexão" a fonte Geologica não tem a
+>    seta, e o Figma usa outra fonte para ela. No site ela sai mais fina. Quer trocar por um ícone ou
+>    está ok assim?
+> 5. **Favicon e imagem de compartilhamento** (a que aparece quando o link é enviado no WhatsApp/LinkedIn)
+>    — não estão no Figma. Usei por enquanto a ilustração da home no ícone e o topo da home na imagem
+>    de compartilhamento. Se quiser desenhar os dois, eu troco.
+> 6. **Página 404** (link quebrado) — também não está no Figma; fiz uma simples no estilo do site.
+>    Quer desenhar uma?
 
 ## Ambiente
 - Next.js 16.4.3 (App Router, Turbopack, Cache Components), React 19, Tailwind 4, TypeScript.
