@@ -16,7 +16,7 @@ export default function Home() {
               <section
                 key={s.id}
                 id={s.id}
-                className="w-full shrink-0 snap-start"
+                className="w-full shrink-0 snap-start overflow-clip"
               >
                 <FigmaPage id={`m-${s.id}`} config={s} />
               </section>
