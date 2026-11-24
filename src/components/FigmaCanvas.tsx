@@ -252,7 +252,8 @@ function Node({
     if (n.bg && /^(#|rgb)/.test(n.bg) && !n.image && !n.m && !n.radius) {
       const left = edge.ox + n.x <= 0;
       const right = edge.ox + n.x + n.w >= edge.PW;
-      bleed = left && right ? "bleed-x" : right ? "bleed-r" : left ? "bleed-l" : "";
+      bleed =
+        left && right ? "bleed-x" : right ? "bleed-r" : left ? "bleed-l" : "";
       if (bleed) Object.assign(style, { "--bg": n.bg });
     }
     el = (

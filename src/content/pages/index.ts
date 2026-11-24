@@ -161,7 +161,9 @@ export const aboutPage = {
     { data: d(mAbout3) },
     {
       data: d(mAbout4),
-      links: [{ href: EMAIL, label: "laura_siufi@hotmail.com", ids: ["77:353"] }],
+      links: [
+        { href: EMAIL, label: "laura_siufi@hotmail.com", ids: ["77:353"] },
+      ],
     },
   ],
 } satisfies { desktop: PageConfig; mobile: PageConfig[] };
@@ -176,7 +178,11 @@ const back = (id: string) => ({
 export const cases = {
   tuttifree: {
     title: "TuttiFree — Brand Strategy e Identidade Visual",
-    desktop: { data: d(tuttifree), titleId: "102:1229", links: [back("102:1348")] },
+    desktop: {
+      data: d(tuttifree),
+      titleId: "102:1229",
+      links: [back("102:1348")],
+    },
     mobile: {
       data: d(mTuttifree),
       titleId: "67:417",
