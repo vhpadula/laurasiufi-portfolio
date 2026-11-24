@@ -44,3 +44,18 @@ html {
     clip-path: inset(0 0 0 -100vmax);
   }
 }
+
+/* Hovers animados (FigmaPage): caixa, posição e opacidade transitam entre a base e o frame de hover. */
+.morph [data-n],
+.morph [data-t] {
+  transition-property: left, top, width, height, margin-top, opacity;
+  transition-duration: 550ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .morph [data-n],
+  .morph [data-t] {
+    transition: none;
+  }
+}

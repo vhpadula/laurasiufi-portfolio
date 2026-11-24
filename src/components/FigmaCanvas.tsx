@@ -72,7 +72,14 @@ export type PageNode =
       shadow?: Shadow[];
       runs: Run[];
     })
-  | { k: "group"; opacity: number; children: PageNode[] };
+  | {
+      k: "group";
+      opacity: number;
+      children: PageNode[];
+      /** Grupos criados pelo FigmaPage (nós de hover): alvo do CSS e alinhamento vertical. */
+      id?: string;
+      dy?: number;
+    };
 
 export type PageData = {
   slug: string;
@@ -165,8 +172,12 @@ function Node({
   if (n.k === "group") {
     return (
       <div
-        className="pointer-events-none absolute inset-0"
-        style={{ opacity: n.opacity }}
+        data-n={n.id}
+        className="pointer-events-none absolute inset-x-0 top-0 h-0"
+        style={{
+          opacity: n.opacity,
+          translate: n.dy ? `0 ${u(n.dy)}` : undefined,
+        }}
       >
         {n.children.map((c, i) => (
           <Node key={i} n={c} W={W} opts={opts} edge={edge} />
@@ -187,6 +198,7 @@ function Node({
     return (
       // eslint-disable-next-line @next/next/no-img-element -- SVG vetorial do Figma, sem otimização a fazer.
       <img
+        data-n={n.id}
         src={n.src}
         alt=""
         className="abs"
@@ -198,6 +210,7 @@ function Node({
     const cap = n.round ? n.weight / 2 : 0;
     el = (
       <span
+        data-n={n.id}
         className="abs"
         style={{
           ...p(n.x, n.y, n.w + cap * 2, n.weight),
@@ -258,6 +271,7 @@ function Node({
     }
     el = (
       <div
+        data-n={n.id}
         className={`abs ${isFrame ? "cv" : ""} ${n.clip || n.image ? "overflow-hidden" : ""} ${bleed}`}
         style={style}
       >
@@ -439,7 +453,7 @@ function Text({
           : undefined,
   };
   return (
-    <Tag className="abs" style={style} data-node={n.id}>
+    <Tag className="abs" style={style} data-n={n.id}>
       {lines.map((line, i, all) => {
         const st = line.style;
         // Listas do Figma: marcador pendurado a ~0,66em e texto recuado ~1,52em por nível (medido no

@@ -32,7 +32,7 @@ for (const slug of process.argv.slice(2)) {
   await page.evaluate(() => document.fonts.ready);
   const widths = await page.evaluate(() =>
     Object.fromEntries(
-      [...document.querySelectorAll("[data-node]")].map((e) => [
+      [...document.querySelectorAll("[data-n]")].map((e) => [
         e.dataset.node,
         e.getBoundingClientRect().width,
       ]),

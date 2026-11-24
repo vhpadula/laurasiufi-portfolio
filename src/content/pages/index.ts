@@ -72,11 +72,55 @@ export const homePage = {
       { href: EMAIL, label: "laura_siufi@hotmail.com", ids: ["97:268"] },
       toTop("97:270"),
     ],
-    // Os frames de hover não estão todos na mesma altura da base: `dy` alinha o título do card.
+    // Hovers animados até os frames de hover do Figma. Os frames não estão todos na mesma altura da
+    // base: `dy` alinha o título do card; o que fica abaixo desce (`shift`) como no Figma.
     variants: [
-      { data: d(homeHoverTutti), clip: [1300] },
-      { data: d(homeHoverItau), dy: 2225 - 2186, clip: [2150] },
-      { data: d(homeHoverTrama), dy: 3188 - 3199, clip: [3150] },
+      {
+        data: d(homeHoverTutti),
+        // Card cresce; a elipse e o texto aparecem atrás/abaixo; a seta fica laranja.
+        morph: [
+          ["97:190", "97:234"],
+          ["97:191", "97:235"],
+          ["97:192", "97:236"],
+          ["97:193", "97:237"],
+          ["97:194", "97:238"],
+          ["97:195", "97:239"],
+          ["97:196", "97:240"],
+          ["97:197", "97:241"],
+          ["97:198", "97:242"],
+        ],
+        enter: [
+          { ids: ["97:220"], before: "97:190" },
+          { ids: ["102:1799", "97:246"] },
+        ],
+        exit: ["97:203"],
+        shift: { from: 2150, by: 2465 - 2225 },
+      },
+      {
+        data: d(homeHoverItau),
+        dy: 2225 - 2186,
+        // Celulares crescem, a faixa laranja abre e o "more about" dá lugar ao texto.
+        morph: [
+          ["97:204", "102:312"],
+          ["97:175", "102:311"],
+        ],
+        enter: [{ ids: ["102:1800", "102:316"] }],
+        exit: ["97:210", "97:208"],
+        shift: { from: 3100, by: 3222 + (2225 - 2186) - 3188 },
+      },
+      {
+        data: d(homeHoverTrama),
+        dy: 3188 - 3199,
+        // Celular cresce e as faixas creme se abrem; a foto e o "more about" saem.
+        morph: [
+          ["97:216", "102:374"],
+          ["97:173", "102:333"],
+          ["97:174", "102:368"],
+        ],
+        enter: [{ ids: ["102:1801", "102:372"] }],
+        exit: ["97:176", "97:217", "97:214"],
+        shift: { from: 4100, by: 4220 + (3188 - 3199) - 4160 },
+      },
     ],
   },
   mobile: {
@@ -148,8 +192,14 @@ export const aboutPage = {
       { href: EMAIL, label: "laura_siufi@hotmail.com", ids: ["102:1811"] },
       toTop("102:1813"),
     ],
-    // Só o menu muda no hover do "Work".
-    variants: [{ data: d(aboutHoverWork), clip: [0, 150] }],
+    // Só o menu muda no hover do "Work": o texto laranja entra no lugar do preto.
+    variants: [
+      {
+        data: d(aboutHoverWork),
+        enter: [{ ids: ["116:84"] }],
+        exit: ["102:1807"],
+      },
+    ],
   },
   mobile: [
     {
