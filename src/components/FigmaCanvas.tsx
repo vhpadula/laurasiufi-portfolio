@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { CroppedImage } from "./CroppedImage";
 import { place } from "@/lib/place";
 
-// Renderiza os dados gerados por scripts/gerar-case.mjs a partir da árvore do Figma. Usa o mesmo
-// canvas da home/About: cada frame é um container e os filhos ficam em px do Figma (ver .cv/.abs).
+// Renderiza os dados gerados por scripts/gerar-pagina.mjs a partir da árvore do Figma. Cada frame é
+// um container e os filhos ficam em px do Figma (ver .cv/.abs em globals.css).
 
 type Shadow = {
   inset: boolean;
@@ -49,7 +48,7 @@ type Base = {
   m?: number[];
   opacity?: number;
 };
-export type CaseNode =
+export type PageNode =
   | (Base & {
       k: "box" | "frame";
       h: number;
@@ -60,7 +59,7 @@ export type CaseNode =
       shadow?: Shadow[];
       translucent?: boolean;
       clip?: boolean;
-      children?: CaseNode[];
+      children?: PageNode[];
     })
   | (Base & { k: "svg"; h: number; src: string })
   | (Base & { k: "line"; weight: number; color: string; round?: boolean })
@@ -73,25 +72,31 @@ export type CaseNode =
       shadow?: Shadow[];
       runs: Run[];
     })
-  | { k: "group"; opacity: number; children: CaseNode[] };
+  | { k: "group"; opacity: number; children: PageNode[] };
 
-export type CaseData = {
+export type PageData = {
   slug: string;
   width: number;
   height: number;
   offset: { x: number; y: number };
   bg?: string;
-  nodes: CaseNode[];
+  nodes: PageNode[];
+  /** Caixa [x, y, w, h] de cada nó (inclusive grupos) em coordenadas da página. */
+  boxes: Record<string, number[]>;
 };
 
-export type CaseOptions = {
+export type CanvasOptions = {
   /** Nó de texto que vira o <h1> da página. */
-  titleId: string;
-  /** Nós que viram links (ex.: "botão voltar" → "/"). */
-  links?: Record<string, string>;
+  titleId?: string;
 };
 
 const FONT: Record<string, string> = {
+  "Bruno Ace SC": "var(--nf-bruno)",
+  Content: "var(--nf-content)",
+  "Contrail One": "var(--nf-contrail)",
+  "Darker Grotesque": "var(--nf-grotesque)",
+  Notable: "var(--nf-notable)",
+  "Noto Sans": "var(--nf-noto)",
   Chivo: "var(--nf-chivo)",
   Cinzel: "var(--nf-cinzel)",
   Geologica: "var(--nf-geologica)",
@@ -105,9 +110,19 @@ const FONT: Record<string, string> = {
 
 /**
  * Deslocamento vertical por família (px do Figma): o Chrome desenha algumas fontes mais alto que o
- * Figma. Medido contra o export, como em `text(…, dy)` (src/lib/place.ts).
+ * Figma. Medido contra o export com scripts/medir-texto.mjs.
  */
-const FONT_DY: Record<string, number> = {};
+const FONT_DY: Record<string, number> = {
+  Content: 1,
+  "Darker Grotesque": 0.5,
+  Notable: 1,
+};
+
+/**
+ * Deslocamento por linha, em em da fonte da linha: o Chrome posiciona estas fontes dentro da entrelinha
+ * diferente do Figma, também em textos com fontes misturadas (Revalia 36px: 10px abaixo, 102:1299).
+ */
+const LINE_DY: Record<string, number> = { Revalia: -0.28 };
 
 const u = (n: number) => `calc(${n} * var(--u))`;
 const shadows = (list: Shadow[]) =>
@@ -130,14 +145,20 @@ const matrix = (m?: number[]) =>
 const sizes = (w: number, W: number) =>
   `(min-width: 1440px) ${Math.round(w)}px, ${Math.max(1, Math.round((w / W) * 100))}vw`;
 
+/** Faixa de cor que encosta na borda da página continua até a borda da janela (telas > 1440). */
+type Edge = { ox: number; PW: number };
+
 function Node({
   n,
   W,
   opts,
+  edge,
 }: {
-  n: CaseNode;
+  n: PageNode;
   W: number;
-  opts: CaseOptions;
+  opts: CanvasOptions;
+  /** Origem x deste container na página e largura da página. */
+  edge: Edge;
 }): ReactNode {
   const p = place(W);
 
@@ -148,13 +169,12 @@ function Node({
         style={{ opacity: n.opacity }}
       >
         {n.children.map((c, i) => (
-          <Node key={i} n={c} W={W} opts={opts} />
+          <Node key={i} n={c} W={W} opts={opts} edge={edge} />
         ))}
       </div>
     );
   }
 
-  const href = n.id ? opts.links?.[n.id] : undefined;
   const transform = matrix(n.m);
   const common: CSSProperties = {
     opacity: n.opacity,
@@ -164,23 +184,14 @@ function Node({
   let el: ReactNode;
 
   if (n.k === "svg") {
-    const box = { ...p(n.x, n.y, n.w, n.h), ...common };
-    const img = (
+    return (
       // eslint-disable-next-line @next/next/no-img-element -- SVG vetorial do Figma, sem otimização a fazer.
       <img
         src={n.src}
         alt=""
-        className={href ? "size-full" : "abs"}
-        style={href ? undefined : box}
+        className="abs"
+        style={{ ...p(n.x, n.y, n.w, n.h), ...common }}
       />
-    );
-    // Link com caixa própria (posicionada), para receber foco pelo teclado.
-    return href ? (
-      <Link href={href} aria-label="Back" className="abs" style={box}>
-        {img}
-      </Link>
-    ) : (
-      img
     );
   } else if (n.k === "line") {
     // O Figma desenha o traço de um lado da linha (y local de −peso a 0); ponta redonda soma meio peso.
@@ -237,14 +248,29 @@ function Node({
       });
     }
     const inner = n.shadow?.filter((s) => s.inset);
+    let bleed = "";
+    if (n.bg && /^(#|rgb)/.test(n.bg) && !n.image && !n.m && !n.radius) {
+      const left = edge.ox + n.x <= 0;
+      const right = edge.ox + n.x + n.w >= edge.PW;
+      bleed = left && right ? "bleed-x" : right ? "bleed-r" : left ? "bleed-l" : "";
+      if (bleed) Object.assign(style, { "--bg": n.bg });
+    }
     el = (
       <div
-        className={`abs ${isFrame ? "cv" : ""} ${n.clip || n.image ? "overflow-hidden" : ""}`}
+        className={`abs ${isFrame ? "cv" : ""} ${n.clip || n.image ? "overflow-hidden" : ""} ${bleed}`}
         style={style}
       >
         {n.image && <Fill image={n.image} w={n.w} W={W} />}
         {isFrame &&
-          n.children?.map((c, i) => <Node key={i} n={c} W={n.w} opts={opts} />)}
+          n.children?.map((c, i) => (
+            <Node
+              key={i}
+              n={c}
+              W={n.w}
+              opts={opts}
+              edge={{ ox: edge.ox + n.x, PW: edge.PW }}
+            />
+          ))}
         {/* Sombra interna por cima da imagem (box-shadow inset ficaria por baixo dela). */}
         {inner?.length ? (
           <span
@@ -293,6 +319,11 @@ function Fill({ image, w, W }: { image: ImageFill; w: number; W: number }) {
  * única dos cases; sem amostra, usa o "normal" do navegador para a fonte.
  */
 const AUTO_LH: Record<string, number> = {
+  "Bruno Ace SC": 1.2031,
+  Content: 1.8438, // letras em Noto Sans (fallback)
+  "Contrail One": 1.25,
+  "Darker Grotesque": 1.3542,
+  Notable: 1.2969,
   Chivo: 1.4464, // medido no 47:108 (o "normal" do Chivo do Google Fonts é 1,19)
   Cinzel: 1.35,
   Geologica: 1.25,
@@ -303,8 +334,9 @@ const AUTO_LH: Record<string, number> = {
   Orbitron: 1.25,
   Revalia: 0.86,
 };
+// O Figma arredonda a entrelinha "auto" para px inteiros (Darker Grotesque: 32px → 43, 36px → 49).
 const lineHeight = (s: Run["style"]) =>
-  s.lh ?? s.size * (AUTO_LH[s.family] ?? 1.2);
+  s.lh ?? Math.round(s.size * (AUTO_LH[s.family] ?? 1.2));
 
 /**
  * Quebra os trechos em linhas, como o Figma mede: cada linha tem a altura da maior entrelinha entre
@@ -320,19 +352,23 @@ function toLines(runs: Run[]) {
     cur.style ??= st;
   };
   for (const r of runs) {
-    r.text
+    const parts = r.text
       // Quebras do Figma: "\n", "\r\n", "\r" sozinho e o separador de linha U+2028.
       .replace(/\r\n?|\u2028/g, "\n")
-      .split("\n")
-      .forEach((part, i) => {
-        if (i > 0) {
-          lines.push(cur);
-          cur = { parts: [], lh: 0 };
-        }
-        if (part) cur.parts.push({ text: part, style: r.style });
-        grow(r.style);
-      });
+      .split("\n");
+    parts.forEach((part, i) => {
+      if (i > 0) {
+        lines.push(cur);
+        cur = { parts: [], lh: 0 };
+      }
+      if (part) cur.parts.push({ text: part, style: r.style });
+      // O "\n" pertence à linha que ele termina: o pedaço vazio depois do último "\n" de um trecho
+      // é o começo da próxima linha, que ganha a fonte do trecho seguinte.
+      if (part || i < parts.length - 1) grow(r.style);
+    });
   }
+  // Linha final vazia (texto terminado em quebra): fica com o estilo do último trecho.
+  if (!cur.lh) grow(runs[runs.length - 1].style);
   lines.push(cur);
   return lines;
 }
@@ -343,9 +379,9 @@ function Text({
   opts,
   common,
 }: {
-  n: Extract<CaseNode, { k: "text" }>;
+  n: Extract<PageNode, { k: "text" }>;
   W: number;
-  opts: CaseOptions;
+  opts: CanvasOptions;
   common: CSSProperties;
 }) {
   const p = place(W);
@@ -360,14 +396,13 @@ function Text({
   const dy = FONT_DY[first.family] ?? 0;
   const px = (v: number) => `calc(${+v.toFixed(3)} * 100cqw / ${W})`;
   // Textos que quebram linha: o CSS conta o letterSpacing depois do último caractere ao decidir a
-  // quebra (o Figma não), então a caixa ganha essa folga (centro/direita compensam o x). Se a altura
+  // quebra e ao alinhar (o Figma não), então a caixa ganha essa folga à direita: assim centro e direita
+  // também alinham como no Figma (medido no "Thanks for scrolling", 97:269). Se a altura
   // do Figma indica uma linha só, o texto não quebra — fontes diferem ~0,5% entre os renderizadores e
   // um texto que "cabe justo" no Figma quebraria no navegador. Vale por parágrafo: se nenhum quebrou
   // no Figma, nenhum quebra aqui.
   const autoWidth = n.resize === "WIDTH_AND_HEIGHT";
   const slack = autoWidth ? 0 : Math.max(...n.runs.map((r) => r.style.ls ?? 0));
-  const shift =
-    n.align === "CENTER" ? slack / 2 : n.align === "RIGHT" ? slack : 0;
   const lines = toLines(n.runs);
   // Se a soma das linhas (parágrafos) já dá a altura do Figma, nenhum parágrafo quebrou lá.
   const paragraphsHeight = lines.reduce(
@@ -380,7 +415,7 @@ function Text({
     Math.abs(paragraphsHeight - n.h) < Math.min(...lines.map((l) => l.lh)) / 2;
   const style: CSSProperties = {
     ...p(
-      n.x - shift,
+      n.x,
       n.y,
       autoWidth ? undefined : n.w + slack,
       fixed ? n.h : undefined,
@@ -423,6 +458,10 @@ function Text({
               ...(st && runStyle(st, W)),
               lineHeight: px(line.lh),
               minHeight: px(line.lh),
+              translate:
+                st && LINE_DY[st.family]
+                  ? `0 ${LINE_DY[st.family]}em`
+                  : undefined,
               paddingLeft: level ? `${1.52 * level}em` : undefined,
               marginBottom:
                 st?.paraSpacing && i < all.length - 1
@@ -482,13 +521,13 @@ function runStyle(s: Run["style"], W: number): CSSProperties {
   };
 }
 
-/** Página inteira de um case: canvas na largura do frame da página, raiz deslocada pelo offset. */
+/** Página inteira: canvas na largura do frame da página, raiz deslocada pelo offset. */
 export function FigmaCanvas({
   data,
-  opts,
+  opts = {},
 }: {
-  data: CaseData;
-  opts: CaseOptions;
+  data: PageData;
+  opts?: CanvasOptions;
 }) {
   const p = place(data.width);
   return (
@@ -509,7 +548,13 @@ export function FigmaCanvas({
         )}
       >
         {data.nodes.map((n, i) => (
-          <Node key={i} n={n} W={data.width} opts={opts} />
+          <Node
+            key={i}
+            n={n}
+            W={data.width}
+            opts={opts}
+            edge={{ ox: data.offset.x, PW: data.width }}
+          />
         ))}
       </div>
     </div>
